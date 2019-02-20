@@ -5,7 +5,10 @@ const imagemin = require('gulp-imagemin');
 const dms2dec =  require('dms2dec')
 const ExifImage = require('exif').ExifImage;
 const globby = require('globby');
-const util = require('util');
+const clean = require('gulp-clean');
+const fs = require('fs')
+const {compareDesc} = require('date-fns')
+const moment = require('moment')
 
 const twoVariantsPerFile = (file, cb) => {
     const small = file.clone()
@@ -48,13 +51,24 @@ const getImageData = async () => {
     return getImageDataFromImage(path)
   })
 
-  let results = Promise.all(promises)
-  await results
+  let results = await Promise.all(promises)
+  results = results.sort((t1, t2) => {
+    const f = 'YYYY:MM:DD HH:mm:ss'
+    t1 = moment(t1.date, f).toDate()
+    t2 = moment(t2.date, f).toDate()
+    return compareDesc(t2, t1)
+  })
+  await fs.writeFile('./photos/index.json', JSON.stringify(results), () => {})
 }
-
 
 // Conversion of HEIC
 // 'for file in *.HEIC; do convert $file -profile 'prof.icc' "`basename $file |  cut -f 1 -d '.'`.jpg"; done'
+
+function cleanup(cb) {
+  src('photos/optimized', {read: false})
+    .pipe(clean());
+  cb()
+}
 
 function scale(cb) {
   src('photos/originals/*.{jpeg,jpg,png,gif,JPG,JPEG}')
@@ -72,4 +86,4 @@ function optimize(cb) {
 }
 
 exports.exif = getImageData;
-exports.default = series(scale, optimize);
+exports.default = series(cleanup, scale, optimize, getImageData);
