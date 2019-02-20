@@ -5,8 +5,7 @@ const imagemin = require('gulp-imagemin');
 const dms2dec =  require('dms2dec')
 const ExifImage = require('exif').ExifImage;
 const globby = require('globby');
-
-
+const util = require('util');
 
 const twoVariantsPerFile = (file, cb) => {
     const small = file.clone()
@@ -16,8 +15,8 @@ const twoVariantsPerFile = (file, cb) => {
     cb(null, [small, medium])
 }
 
-const getImageDataFromImage = (image, cb) => {
-  try {
+const getImageDataFromImage = (image) => {
+  return new Promise((resolve) => {
       new ExifImage({ image }, function (error, exifData) {
           let dec
           if(exifData.gps.GPSLatitude) {
@@ -29,25 +28,28 @@ const getImageDataFromImage = (image, cb) => {
         } else {
           dec = [null, null]
         }
-          // console.log(exifData)
-          cb ({
-            date: exifData.exif.DateTimeOriginal,
-            description: exifData.image.ImageDescription,
-            lat: dec[0],
-            lng: dec[1],
-            width: exifData.exif.ExifImageWidth,
-            height: exifData.exif.ExifImageHeight,
-          })
+
+        resolve({
+          path: image,
+          date: exifData.exif.DateTimeOriginal,
+          description: exifData.image.ImageDescription,
+          lat: dec[0],
+          lng: dec[1],
+          width: exifData.exif.ExifImageWidth,
+          height: exifData.exif.ExifImageHeight,
+        })
       });
-  } catch (error) {
-  }
+  })
 }
 
 const getImageData = async () => {
   const paths = await globby(['photos/originals/*.{jpg,JPG}']);
-  paths.forEach((path) => {
-    getImageDataFromImage(path, console.log)
+  const promises = paths.map((path) => {
+    return getImageDataFromImage(path)
   })
+
+  let results = Promise.all(promises)
+  await results
 }
 
 
