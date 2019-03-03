@@ -9,6 +9,11 @@ const clean = require('gulp-clean');
 const fs = require('fs')
 const {compareDesc} = require('date-fns')
 const moment = require('moment')
+const yamlFront = require('yaml-front-matter');
+const path = require('path')
+
+
+const dateFormat = 'YYYY:MM:DD HH:mm:ss'
 
 const twoVariantsPerFile = (file, cb) => {
     const small = file.clone()
@@ -33,7 +38,7 @@ const getImageDataFromImage = (image) => {
         }
 
         resolve({
-          path: image,
+          file: path.basename(image),
           date: exifData.exif.DateTimeOriginal,
           description: exifData.image.ImageDescription,
           lat: dec[0],
@@ -47,15 +52,14 @@ const getImageDataFromImage = (image) => {
 
 const getImageData = async () => {
   const paths = await globby(['photos/originals/*.{jpg,JPG}']);
-  const promises = paths.map((path) => {
-    return getImageDataFromImage(path)
+  const promises = paths.map((p) => {
+    return getImageDataFromImage(p)
   })
 
   let results = await Promise.all(promises)
   results = results.sort((t1, t2) => {
-    const f = 'YYYY:MM:DD HH:mm:ss'
-    t1 = moment(t1.date, f).toDate()
-    t2 = moment(t2.date, f).toDate()
+    t1 = moment(t1.date, dateFormat).toDate()
+    t2 = moment(t2.date, dateFormat).toDate()
     return compareDesc(t2, t1)
   })
   await fs.writeFile('./photos/index.json', JSON.stringify(results), () => {})
@@ -83,6 +87,15 @@ function optimize(cb) {
     .pipe(imagemin())
     .pipe(dest('photos/optimized'))
   cb()
+}
+
+const parseStoryFile = async (file) => {
+  const contents = await fs.readFile(file)
+  const obj = yamlFront.loadFront(contents)
+}
+
+async function renderStories() {
+  const paths = await globby(['public/stories/*.md']);
 }
 
 exports.exif = getImageData;
