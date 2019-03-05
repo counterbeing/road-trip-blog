@@ -7,11 +7,11 @@ const ExifImage = require('exif').ExifImage;
 const globby = require('globby');
 const clean = require('gulp-clean');
 const fs = require('fs')
-const {compareDesc} = require('date-fns')
+const {compareDesc, subSeconds} = require('date-fns')
 const moment = require('moment')
 const yamlFront = require('yaml-front-matter');
 const path = require('path')
-
+const showdown = require('showdown')
 
 const dateFormat = 'YYYY:MM:DD HH:mm:ss'
 
@@ -39,7 +39,7 @@ const getImageDataFromImage = (image) => {
 
         resolve({
           file: path.basename(image),
-          date: exifData.exif.DateTimeOriginal,
+          date: moment(exifData.exif.DateTimeOriginal, dateFormat).toDate(),
           description: exifData.image.ImageDescription,
           lat: dec[0],
           lng: dec[1],
@@ -58,9 +58,7 @@ const getImageData = async () => {
 
   let results = await Promise.all(promises)
   results = results.sort((t1, t2) => {
-    t1 = moment(t1.date, dateFormat).toDate()
-    t2 = moment(t2.date, dateFormat).toDate()
-    return compareDesc(t2, t1)
+    return compareDesc(t2.date, t1.date)
   })
   await fs.writeFile('./photos/index.json', JSON.stringify(results), () => {})
 }
@@ -89,14 +87,42 @@ function optimize(cb) {
   cb()
 }
 
+const processMarkdown = (md) => {
+  converter = new showdown.Converter(),
+  html = converter.makeHtml(md);
+  return html
+}
+
+
 const parseStoryFile = async (file) => {
-  const contents = await fs.readFile(file)
+  const contents = fs.readFileSync(file)
   const obj = yamlFront.loadFront(contents)
+  return {
+    title: obj.title,
+    date: moment(obj.date, dateFormat).toDate(),
+    body: processMarkdown(obj.__content)
+  }
+
 }
 
 async function renderStories() {
   const paths = await globby(['public/stories/*.md']);
+  let stories = paths.map((path) => parseStoryFile(path))
+  const photos =  JSON.parse(fs.readFileSync('./photos/index.json')).map((p) => {
+  })
+  stories = await Promise.all(stories)
+  stories = stories.sort((t1, t2) => compareDesc(t2.date, t1.date))
+  stories = stories.map((e, i) => {
+    let next = stories[i + 1]
+    if(!next) next = { date: new Date() }
+    const endDate = subSeconds(next.date, 1)
+    return {...e, endDate}
+  })
+  console.log(stories)
+  console.log(stories)
+  await fs.writeFile('./photos/stories.json', JSON.stringify(stories), () => {})
 }
 
 exports.exif = getImageData;
+exports.stories = renderStories;
 exports.default = series(cleanup, scale, optimize, getImageData);
