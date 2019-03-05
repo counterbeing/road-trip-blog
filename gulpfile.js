@@ -7,7 +7,7 @@ const ExifImage = require('exif').ExifImage;
 const globby = require('globby');
 const clean = require('gulp-clean');
 const fs = require('fs')
-const {compareDesc, subSeconds} = require('date-fns')
+const {isWithinRange, compareDesc, subSeconds} = require('date-fns')
 const moment = require('moment')
 const yamlFront = require('yaml-front-matter');
 const path = require('path')
@@ -108,7 +108,9 @@ const parseStoryFile = async (file) => {
 async function renderStories() {
   const paths = await globby(['public/stories/*.md']);
   let stories = paths.map((path) => parseStoryFile(path))
-  const photos =  JSON.parse(fs.readFileSync('./photos/index.json')).map((p) => {
+  const allPhotos =  JSON.parse(fs.readFileSync('./photos/index.json')).map((p) => {
+    p.date = new Date(p.date)
+    return p
   })
   stories = await Promise.all(stories)
   stories = stories.sort((t1, t2) => compareDesc(t2.date, t1.date))
@@ -116,9 +118,15 @@ async function renderStories() {
     let next = stories[i + 1]
     if(!next) next = { date: new Date() }
     const endDate = subSeconds(next.date, 1)
-    return {...e, endDate}
+    const photos = allPhotos.filter((p) => {
+      console.log(p.date)
+      console.log(e.date)
+      console.log(next.date)
+      console.log('---')
+      return isWithinRange(p.date, e.date, next.date)
+    })
+    return {...e, endDate, photos}
   })
-  console.log(stories)
   console.log(stories)
   await fs.writeFile('./photos/stories.json', JSON.stringify(stories), () => {})
 }
