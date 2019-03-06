@@ -119,7 +119,7 @@ async function renderStories() {
   stories = stories.map((e, i) => {
     let next = stories[i + 1]
     if(!next) next = { date: new Date() }
-    const endDate = subSeconds(next.date, 1)
+    const endDate = subSeconds(next.date, 90)
     const photos = allPhotos.filter((p) => isWithinRange(p.date, e.date, next.date))
     const photosWithLocation = photos.filter((p) => p.lat)
     const lat = photosWithLocation.reduce((a, e) => a + e.lat, 0) / photosWithLocation.length

@@ -9,7 +9,7 @@
     >
       <l-tile-layer :url="url" :attribution="attribution"/>
       <l-marker v-for='(place, index) in places'
-        @click='updateInspector(index)'
+        @click='updateInspector(place.story)'
         :lat-lng="place.latlng"
         :key='index'>
       </l-marker>
@@ -18,15 +18,12 @@
 </template>
 
 <script>
-// import Inspector from '@/components/Inspector';
 import L from 'leaflet';
+import { mapActions } from 'vuex';
 import Stories from './stories.json';
-// import store from '../store';
-
 
 export default {
   name: 'Map',
-  // components: { Inspector },
   data() {
     return {
       placeIndex: null,
@@ -43,13 +40,15 @@ export default {
   computed: {
     places() {
       return Stories.map(story => ({
+        story,
         latlng: L.latLng(story.lat, story.lng),
       }));
     },
   },
   methods: {
-    updateInspector(placeIndex) {
-      this.placeIndex = placeIndex;
+    ...mapActions(['setStory']),
+    updateInspector(story) {
+      this.setStory(story);
     },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
@@ -65,7 +64,7 @@ export default {
 @import 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.css';
 .map-container {
   position: absolute;
-  width: 100%;
+  width: 50%;
   height: 100%;
   top: 0;
   bottom: 0;
