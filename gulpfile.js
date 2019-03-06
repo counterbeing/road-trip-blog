@@ -37,10 +37,12 @@ const getImageDataFromImage = (image) => {
           dec = [null, null]
         }
 
+        const description = exifData.image.ImageDescription;
+
         resolve({
           file: path.basename(image),
           date: moment(exifData.exif.DateTimeOriginal, dateFormat).toDate(),
-          description: exifData.image.ImageDescription,
+          description,
           lat: dec[0],
           lng: dec[1],
           width: exifData.exif.ExifImageWidth,
@@ -60,7 +62,7 @@ const getImageData = async () => {
   results = results.sort((t1, t2) => {
     return compareDesc(t2.date, t1.date)
   })
-  await fs.writeFile('./photos/index.json', JSON.stringify(results), () => {})
+  await fs.writeFile('./src/components/photos.json', JSON.stringify(results), () => {})
 }
 
 // Conversion of HEIC
@@ -99,7 +101,7 @@ const parseStoryFile = async (file) => {
   const obj = yamlFront.loadFront(contents)
   return {
     title: obj.title,
-    date: moment(obj.date, dateFormat).toDate(),
+    date: new Date(obj.date),
     body: processMarkdown(obj.__content)
   }
 
@@ -108,7 +110,7 @@ const parseStoryFile = async (file) => {
 async function renderStories() {
   const paths = await globby(['public/stories/*.md']);
   let stories = paths.map((path) => parseStoryFile(path))
-  const allPhotos =  JSON.parse(fs.readFileSync('./photos/index.json')).map((p) => {
+  const allPhotos =  JSON.parse(fs.readFileSync('./src/components/photos.json')).map((p) => {
     p.date = new Date(p.date)
     return p
   })
@@ -118,19 +120,16 @@ async function renderStories() {
     let next = stories[i + 1]
     if(!next) next = { date: new Date() }
     const endDate = subSeconds(next.date, 1)
-    const photos = allPhotos.filter((p) => {
-      console.log(p.date)
-      console.log(e.date)
-      console.log(next.date)
-      console.log('---')
-      return isWithinRange(p.date, e.date, next.date)
-    })
-    return {...e, endDate, photos}
+    const photos = allPhotos.filter((p) => isWithinRange(p.date, e.date, next.date))
+    const photosWithLocation = photos.filter((p) => p.lat)
+    const lat = photosWithLocation.reduce((a, e) => a + e.lat, 0) / photosWithLocation.length
+    const lng = photosWithLocation.reduce((a, e) => a + e.lng, 0) / photosWithLocation.length
+    return {...e, endDate, photos, lat, lng}
   })
-  console.log(stories)
-  await fs.writeFile('./photos/stories.json', JSON.stringify(stories), () => {})
+  // console.log(stories)
+  await fs.writeFile('./src/components/stories.json', JSON.stringify(stories), () => {})
 }
 
 exports.exif = getImageData;
 exports.stories = renderStories;
-exports.default = series(cleanup, scale, optimize, getImageData);
+exports.default = series(cleanup, scale, optimize, getImageData, renderStories);

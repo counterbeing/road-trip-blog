@@ -20,6 +20,7 @@
 <script>
 // import Inspector from '@/components/Inspector';
 import L from 'leaflet';
+import Stories from './stories.json';
 // import store from '../store';
 
 
@@ -41,14 +42,10 @@ export default {
   },
   computed: {
     places() {
-      return [{ latlng: L.latLng(35.57369428380629, -97.82369995593741) }];
-    //   return store.state.places.map(place => ({
-    //     latlng: L.latLng(place.lat, place.lng),
-    //   }));
+      return Stories.map(story => ({
+        latlng: L.latLng(story.lat, story.lng),
+      }));
     },
-    // positions() {
-    //   return store.state.positions.filter(position => position.placeIndex === this.placeIndex);
-    // },
   },
   methods: {
     updateInspector(placeIndex) {

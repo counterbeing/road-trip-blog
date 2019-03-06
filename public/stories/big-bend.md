@@ -1,5 +1,5 @@
 ---
 title: It's Bent
-date: 2019:02:07 14:37:05
+date: 2019-02-07T00:14:01.000Z
 ---
 Living out of a bucket.
