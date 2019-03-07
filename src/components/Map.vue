@@ -59,7 +59,7 @@ export default {
       }));
     },
     photos() {
-      if (!this.story.photos) return [];
+      if (!this.story || !this.story.photos) return [];
       return this.story.photos.filter(p => p.lat).map(photo => ({
         photo,
         latLng: L.latLng(photo.lat, photo.lng),

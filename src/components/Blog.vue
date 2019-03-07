@@ -22,6 +22,10 @@ export default {
       this.setStory(to.params.id);
     },
   },
+  mounted() {
+    // if (this.$route.params.id)
+    this.setStory(this.$route.params.id);
+  },
 };
 </script>
 
