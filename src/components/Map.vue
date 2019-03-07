@@ -13,14 +13,20 @@
         :lat-lng="place.latlng"
         :key='index'>
       </l-marker>
+      <l-marker :icon='cmarker' v-if='story' v-for='(photo, index) in photos'
+        :lat-lng="photo.latLng"
+        v-bind:key="photo.file + index"
+        >
+      </l-marker>
     </l-map>
   </div>
 </template>
 
 <script>
 import L from 'leaflet';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Stories from './stories.json';
+
 
 export default {
   name: 'Map',
@@ -38,10 +44,24 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['story']),
+    cmarker() {
+      return L.icon({
+        iconUrl: require('../../public/dot.png'),
+        iconSize: [20, 20],
+      });
+    },
     places() {
       return Stories.map(story => ({
         story,
         latlng: L.latLng(story.lat, story.lng),
+      }));
+    },
+    photos() {
+      if (!this.story.photos) return [];
+      return this.story.photos.filter(p => p.lat).map(photo => ({
+        photo,
+        latLng: L.latLng(photo.lat, photo.lng),
       }));
     },
   },

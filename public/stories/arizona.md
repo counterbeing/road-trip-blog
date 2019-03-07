@@ -1,5 +1,6 @@
 ---
-title: A City
+title: Mini Road Trip
 date: 2019-01-23T18:35:57.000Z
 ---
-Schtuff.
+
+Katie and I took off to see her parents for a couple of days.
