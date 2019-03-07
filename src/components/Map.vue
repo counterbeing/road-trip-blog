@@ -78,7 +78,7 @@ export default {
       if (!this.photoBounds) return;
       this.$refs.map.mapObject.fitBounds(
         this.photoBounds,
-        { padding: [1, 1] },
+        { padding: [1, 1], maxZoom: 12 },
       );
     },
   },
