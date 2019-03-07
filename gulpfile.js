@@ -12,6 +12,7 @@ const moment = require('moment')
 const yamlFront = require('yaml-front-matter');
 const path = require('path')
 const showdown = require('showdown')
+const { kebabCase } = require('lodash')
 
 const dateFormat = 'YYYY:MM:DD HH:mm:ss'
 
@@ -124,7 +125,8 @@ async function renderStories() {
     const photosWithLocation = photos.filter((p) => p.lat)
     const lat = photosWithLocation.reduce((a, e) => a + e.lat, 0) / photosWithLocation.length
     const lng = photosWithLocation.reduce((a, e) => a + e.lng, 0) / photosWithLocation.length
-    return {...e, endDate, photos, lat, lng}
+    const id = kebabCase(e.title + moment(e.date).format('YYYY-MM-DD'))
+    return {id, ...e, endDate, photos, lat, lng}
   })
   // console.log(stories)
   await fs.writeFile('./src/components/stories.json', JSON.stringify(stories), () => {})

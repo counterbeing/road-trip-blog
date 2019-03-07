@@ -10,7 +10,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Blog',
+      name: 'Blog Index',
+      component: Blog,
+    },
+    {
+      path: '/:id',
+      name: 'Story',
       component: Blog,
     },
     {

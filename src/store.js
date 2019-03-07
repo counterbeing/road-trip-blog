@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Stories from './components/stories.json';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    currentStory: {},
+    currentStory: null,
   },
   mutations: {
     setStory(state, story) {
@@ -16,6 +17,6 @@ export default new Vuex.Store({
     setStory: (context, payload) => context.commit('setStory', payload),
   },
   getters: {
-    story: state => state.currentStory,
+    story: state => Stories.find(s => state.currentStory === s.id),
   },
 });

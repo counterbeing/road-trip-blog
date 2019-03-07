@@ -1,6 +1,7 @@
 <template>
   <div class='map-container'>
     <l-map
+      ref="map"
       :zoom="zoom"
       :center="center"
       :options="mapOptions"
@@ -24,6 +25,7 @@
 
 <script>
 import L from 'leaflet';
+import { max, min } from 'lodash';
 import { mapActions, mapGetters } from 'vuex';
 import Stories from './stories.json';
 
@@ -32,6 +34,11 @@ export default {
   name: 'Map',
   data() {
     return {
+      cmarker: L.icon({
+        // eslint-disable-next-line global-require
+        iconUrl: require('../../public/dot.png'),
+        iconSize: [20, 20],
+      }),
       placeIndex: null,
       zoom: 3,
       center: L.latLng(35.57369428380629, -97.82369995593741),
@@ -45,12 +52,6 @@ export default {
   },
   computed: {
     ...mapGetters(['story']),
-    cmarker() {
-      return L.icon({
-        iconUrl: require('../../public/dot.png'),
-        iconSize: [20, 20],
-      });
-    },
     places() {
       return Stories.map(story => ({
         story,
@@ -64,11 +65,28 @@ export default {
         latLng: L.latLng(photo.lat, photo.lng),
       }));
     },
+    photoBounds() {
+      const latitudes = this.photos.map(p => p.latLng.lat);
+      const longitudes = this.photos.map(p => p.latLng.lng);
+      const corner1 = L.latLng(max(latitudes), max(longitudes));
+      const corner2 = L.latLng(min(latitudes), min(longitudes));
+      return L.latLngBounds(corner1, corner2);
+    },
+  },
+  watch: {
+    photoBounds() {
+      if (!this.photoBounds) return;
+      this.$refs.map.mapObject.fitBounds(
+        this.photoBounds,
+        { padding: [1, 1] },
+      );
+    },
   },
   methods: {
     ...mapActions(['setStory']),
     updateInspector(story) {
-      this.setStory(story);
+      this.$router.push({ name: 'Story', params: { id: story.id } });
+      // this.setStory(story.id);
     },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
