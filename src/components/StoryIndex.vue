@@ -7,20 +7,25 @@
         v-bind:key='story.id'
         :to="{ name: 'Story', params: { id: story.id }}
         ">
-        {{story.title}}
+        {{story.title}} {{ story.date | moment}}
       </router-link>
     </ul>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 import Stories from './stories.json';
-import moment from 'moment'
 
 export default {
   data: () => ({
     stories: Stories,
   }),
+  filters: {
+    moment(date) {
+      return moment(date).format('LL');
+    },
+  },
 };
 </script>
 

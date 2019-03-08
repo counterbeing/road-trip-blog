@@ -41,7 +41,7 @@ export default {
         // eslint-disable-next-line global-require
         shadowUrl: require('../../public/dot-shadow.png'),
         shadowSize: [20, 20],
-        shadowAnchor: [8, 8]
+        shadowAnchor: [8, 8],
       }),
       placeIndex: null,
       zoom: 3,

@@ -8,6 +8,12 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
+
+    {
+      path: '/photos',
+      name: 'Photos',
+      component: Photos,
+    },
     {
       path: '/',
       name: 'Blog Index',
@@ -18,10 +24,6 @@ export default new Router({
       name: 'Story',
       component: Blog,
     },
-    {
-      path: '/photos',
-      name: 'Photos',
-      component: Photos,
-    },
+
   ],
 });
