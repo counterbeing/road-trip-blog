@@ -15,6 +15,7 @@
 
 <script>
 import Stories from './stories.json';
+import moment from 'moment'
 
 export default {
   data: () => ({
