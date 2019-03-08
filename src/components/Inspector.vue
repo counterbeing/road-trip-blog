@@ -1,5 +1,6 @@
 <template>
   <div class='inspector'>
+    <router-link to='/'>Index</router-link>
     <div v-if='!storySelected'>
       <story-index />
     </div>

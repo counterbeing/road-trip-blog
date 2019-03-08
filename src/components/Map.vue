@@ -11,7 +11,7 @@
       <l-tile-layer :url="url" :attribution="attribution"/>
       <l-marker v-for='(place, index) in places'
         @click='updateInspector(place.story)'
-        :lat-lng="place.latlng"
+        :lat-lng="place.latLng"
         :key='index'>
       </l-marker>
       <l-marker :icon='cmarker' v-if='story' v-for='(photo, index) in photos'
@@ -55,7 +55,7 @@ export default {
     places() {
       return Stories.map(story => ({
         story,
-        latlng: L.latLng(story.lat, story.lng),
+        latLng: L.latLng(story.lat, story.lng),
       }));
     },
     photos() {
@@ -72,18 +72,35 @@ export default {
       const corner2 = L.latLng(min(latitudes), min(longitudes));
       return L.latLngBounds(corner1, corner2);
     },
+    storyBounds() {
+      const latitudes = this.places.map(p => p.latLng.lat);
+      const longitudes = this.places.map(p => p.latLng.lng);
+      const corner1 = L.latLng(max(latitudes), max(longitudes));
+      const corner2 = L.latLng(min(latitudes), min(longitudes));
+      return L.latLngBounds(corner1, corner2);
+    },
   },
   watch: {
-    photoBounds() {
-      if (!this.photoBounds) return;
-      this.$refs.map.mapObject.fitBounds(
-        this.photoBounds,
-        { padding: [1, 1], maxZoom: 12 },
-      );
-    },
+    story() { this.updateMapBounds(); },
+  },
+  mounted() {
+    this.updateMapBounds();
   },
   methods: {
     ...mapActions(['setStory']),
+    updateMapBounds() {
+      if (!this.story) {
+        this.$refs.map.mapObject.fitBounds(
+          this.storyBounds,
+          { padding: [1, 1], maxZoom: 12, animate: true },
+        );
+      } else {
+        this.$refs.map.mapObject.fitBounds(
+          this.photoBounds,
+          { padding: [1, 1], maxZoom: 12 },
+        );
+      }
+    },
     updateInspector(story) {
       this.$router.push({ name: 'Story', params: { id: story.id } });
       // this.setStory(story.id);

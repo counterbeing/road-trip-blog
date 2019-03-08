@@ -2,9 +2,9 @@
   <div id='story-index'>
     <h1>STORIES</h1>
     <ul>
-      <li v-for='story in stories' v-bind:key='story.id'></li>
       <router-link
         v-for='story in stories' tag='li'
+        v-bind:key='story.id'
         :to="{ name: 'Story', params: { id: story.id }}
         ">
         {{story.title}}

@@ -23,7 +23,6 @@ export default {
     },
   },
   mounted() {
-    // if (this.$route.params.id)
     this.setStory(this.$route.params.id);
   },
 };
