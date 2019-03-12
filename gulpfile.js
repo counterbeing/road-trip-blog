@@ -13,6 +13,7 @@ const yamlFront = require('yaml-front-matter');
 const path = require('path')
 const showdown = require('showdown')
 const { kebabCase } = require('lodash')
+const { geocoder } = require('./build/geocoder.js')
 
 const dateFormat = 'YYYY:MM:DD HH:mm:ss'
 
@@ -102,6 +103,9 @@ const parseStoryFile = async (file) => {
   const obj = yamlFront.loadFront(contents)
   return {
     title: obj.title,
+    location: obj.location,
+    startDate: obj.start_date,
+    endDate: obj.end_date,
     date: new Date(obj.date),
     body: processMarkdown(obj.__content)
   }
@@ -117,7 +121,7 @@ async function renderStories() {
   })
   stories = await Promise.all(stories)
   stories = stories.sort((t1, t2) => compareDesc(t2.date, t1.date))
-  stories = stories.map((e, i) => {
+  stories = stories.map(async (e, i) => {
     let next = stories[i + 1]
     if(!next) next = { date: new Date() }
     const endDate = subSeconds(next.date, 90)
@@ -126,9 +130,13 @@ async function renderStories() {
     const lat = photosWithLocation.reduce((a, e) => a + e.lat, 0) / photosWithLocation.length
     const lng = photosWithLocation.reduce((a, e) => a + e.lng, 0) / photosWithLocation.length
     const id = kebabCase(e.title + moment(e.date).format('YYYY-MM-DD'))
-    return {id, ...e, endDate, photos, lat, lng}
+    const place = await geocoder(e.location)
+
+    const latLng = place.results[0].location
+    return {id, ...e, endDate, photos, ...latLng}
   })
-  // console.log(stories)
+  stories = await Promise.all(stories)
+
   await fs.writeFile('./src/components/stories.json', JSON.stringify(stories), () => {})
 }
 
