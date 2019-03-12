@@ -1,6 +1,10 @@
 <template>
   <div class='inspector'>
-    <router-link to='/'>Index</router-link>
+    <div v-if='storySelected'>
+      <router-link :to="{name: 'Story', params: {id: story.previousId}}">Previous</router-link>
+      <router-link to='/'>Index</router-link>
+      <router-link :to="{name: 'Story', params: {id: story.nextId}}">next</router-link>
+    </div>
     <div v-if='!storySelected'>
       <story-index />
     </div>

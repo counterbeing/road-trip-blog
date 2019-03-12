@@ -104,8 +104,8 @@ const parseStoryFile = async (file) => {
   return {
     title: obj.title,
     location: obj.location,
-    startDate: obj.start_date,
-    endDate: obj.end_date,
+    startDate: new Date(obj.start_date),
+    endDate: new Date(obj.end_date),
     date: new Date(obj.date),
     body: processMarkdown(obj.__content)
   }
@@ -120,12 +120,9 @@ async function renderStories() {
     return p
   })
   stories = await Promise.all(stories)
-  stories = stories.sort((t1, t2) => compareDesc(t2.date, t1.date))
+  stories = stories.sort((t1, t2) => compareDesc(t2.startDate, t1.startDate))
   stories = stories.map(async (e, i) => {
-    let next = stories[i + 1]
-    if(!next) next = { date: new Date() }
-    const endDate = subSeconds(next.date, 90)
-    const photos = allPhotos.filter((p) => isWithinRange(p.date, e.date, endDate))
+    const photos = allPhotos.filter((p) => isWithinRange(p.date, e.startDate, e.endDate))
     const photosWithLocation = photos.filter((p) => p.lat)
     const lat = photosWithLocation.reduce((a, e) => a + e.lat, 0) / photosWithLocation.length
     const lng = photosWithLocation.reduce((a, e) => a + e.lng, 0) / photosWithLocation.length
@@ -133,9 +130,17 @@ async function renderStories() {
     const place = await geocoder(e.location)
 
     const latLng = place.results[0].location
-    return {id, ...e, endDate, photos, ...latLng}
+    return {id, ...e, ...latLng, photos}
   })
   stories = await Promise.all(stories)
+
+  stories = stories.map((e, i) => {
+    let next = stories[i + 1]
+    next = next ? next : {}
+    let previous = stories[i - 1]
+    previous = previous ? previous : {}
+    return { ...e, previousId: previous.id, nextId: next.id }
+  })
 
   await fs.writeFile('./src/components/stories.json', JSON.stringify(stories), () => {})
 }
