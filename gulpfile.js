@@ -12,7 +12,7 @@ const moment = require('moment')
 const yamlFront = require('yaml-front-matter');
 const path = require('path')
 const showdown = require('showdown')
-const { kebabCase } = require('lodash')
+const { kebabCase, every } = require('lodash')
 const { geocoder } = require('./build/geocoder.js')
 
 const dateFormat = 'YYYY:MM:DD HH:mm:ss'
@@ -140,6 +140,19 @@ async function renderStories() {
     let previous = stories[i - 1]
     previous = previous ? previous : {}
     return { ...e, previousId: previous.id, nextId: next.id }
+  })
+
+  stories = stories.map((story, i) => {
+    const overlaps = stories.filter(s => {
+      return isWithinRange(s.startDate, story.startDate, story.endDate) &&
+        s.id !== story.id
+    })
+    const photos = story.photos.filter((photo) => {
+      return every(overlaps, (overlap) => {
+        return !isWithinRange(photo.date, overlap.startDate, overlap.endDate)
+      })
+    })
+    return { ...story, photos }
   })
 
   await fs.writeFile('./src/components/stories.json', JSON.stringify(stories), () => {})

@@ -6,4 +6,4 @@ end_date: 2019-02-19T16:29:39.000Z
 location: Austin, TX
 ---
 
-The only thing that was really on the list was barbacue. And we got that.
+The only thing that was really on the list was barbecue. And we got that.
