@@ -1,8 +1,18 @@
 <template>
   <div class='parent'>
-    <router-link tag='div' class='child' :to="{name: 'Story', params: {id: story.previousId}}">Previous</router-link>
+    <router-link
+      tag='div'
+      class='child'
+      :to="{name: 'Story', params: {id: story.previousId}}">
+      Previous
+    </router-link>
     <router-link tag='div' class='child' to='/'>Index</router-link>
-    <router-link tag='div' class='child' :to="{name: 'Story', params: {id: story.nextId}}">next</router-link>
+    <router-link
+      tag='div'
+      class='child'
+      :to="{name: 'Story', params: {id: story.nextId}}">
+      Next
+    </router-link>
   </div>
 </template>
 <script>
