@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import router from '@/router';
+import moment from 'moment';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -26,6 +27,9 @@ Icon.Default.mergeOptions({
 });
 
 Vue.config.productionTip = false;
+
+Vue.filter('formatDate', value => moment(value).format('LL'));
+
 
 /* eslint-disable no-new */
 new Vue({

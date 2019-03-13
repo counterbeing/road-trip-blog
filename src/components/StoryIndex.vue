@@ -8,25 +8,19 @@
         :to="{ name: 'Story', params: { id: story.id }}
         ">
         <h2>{{story.title}}</h2>
-        <small>{{ story.date | moment}}</small>
+        <small>{{ story.date | formatDate}}</small>
       </router-link>
     </ul>
   </div>
 </template>
 
 <script>
-import moment from 'moment';
 import Stories from './stories.json';
 
 export default {
   data: () => ({
     stories: Stories,
   }),
-  filters: {
-    moment(date) {
-      return moment(date).format('LL');
-    },
-  },
 };
 </script>
 
