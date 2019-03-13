@@ -123,7 +123,7 @@ export default {
 @import 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.css';
 .map-container {
   position: absolute;
-  width: 50%;
+  width: 60%;
   height: 100%;
   top: 0;
   bottom: 0;

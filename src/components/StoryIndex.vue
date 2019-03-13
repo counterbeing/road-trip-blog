@@ -7,7 +7,8 @@
         v-bind:key='story.id'
         :to="{ name: 'Story', params: { id: story.id }}
         ">
-        {{story.title}} {{ story.date | moment}}
+        <h2>{{story.title}}</h2>
+        <small>{{ story.date | moment}}</small>
       </router-link>
     </ul>
   </div>
@@ -32,5 +33,23 @@ export default {
 <style>
   ul {
     list-style: none;
+    padding: 0;
+  }
+  li {
+    padding: 1em;
+    background-color: #FFF;
+    transition: 0.2s;
+  }
+
+  li:hover {
+    background-color: #f4511e;
+    color: white;
+    cursor: pointer;
+  }
+  h2 {
+    margin: 0;
+  }
+  small {
+    margin-top: -20px;
   }
 </style>
