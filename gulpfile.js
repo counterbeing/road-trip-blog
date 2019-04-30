@@ -172,7 +172,7 @@ async function sitemap() {
       cacheTime: 600000,  //600 sec (10 min) cache purge period
       urls
     });
-    fs.writeFileSync("static/sitemap.xml", sitemap.toString());
+    fs.writeFileSync("public/seo/sitemap.xml", sitemap.toString());
 }
 
 exports.exif = getImageData;

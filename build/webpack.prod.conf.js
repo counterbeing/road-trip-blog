@@ -129,6 +129,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
+    ]),
+
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../public/seo'),
+        to:  path.join(__dirname, '../dist'),
+        ignore: ['.*']
+      }
     ])
   ]
 })
