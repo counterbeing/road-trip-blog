@@ -13,16 +13,17 @@ steps:
         from_secret: docker_password
 
   - name: Deploy To Kontena
-    image: corylogan/kontena-cli
+    image: kontena/cli
     envoronment:
       KONTENA_URL:
         from_secret: kontena_url
       KONTENA_TOKEN:
-        from_secret: KONTENA_TOKEN
+        from_secret: kontena_token
       KONTENA_GRID: prod
+      SSL_IGNORE_ERRORS: true
 
     commands:
-      - SSL_IGNORE_ERRORS=true kontena stack deploy together
+      - kontena stack deploy together
 
 branches:
   - master
