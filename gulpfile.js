@@ -164,7 +164,7 @@ async function renderStories() {
 async function sitemap() {
     const stories = fs.readJsonSync('./src/components/stories.json')
     const urls = stories.map((story) => {
-      return { url: '/#/' + story.id, changefreq: 'monthly', priority: 0.7}
+      return { url: '/' + story.id, changefreq: 'monthly', priority: 0.7}
     })
     urls.push({ url: '/', changefreq: 'monthly', priority: 0.7})
     var sitemap = sm.createSitemap({

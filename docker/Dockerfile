@@ -15,7 +15,7 @@ COPY . .
 
 # run webpack and the vue-loader
 RUN npm run build
-RUN ls
+
 
 
 # ------------------------------------------
@@ -34,12 +34,8 @@ COPY docker/default.conf /etc/nginx/conf.d/default.conf
 # Set the directory we want to run the next commands for
 WORKDIR /tmp/nginx/app
 
-COPY --from=builder /dist/* /var/www/html/
+COPY --from=builder /dist/ /var/www/html/
+RUN ls /var/www/html
 
-# RUN cp -r dist/* /var/www/html
-
-# make all files belong to the nginx user
 RUN chown nginx:nginx /var/www/html
-
-# start nginx and keep the process from backgrounding and the container from quitting
 CMD ["nginx", "-g", "daemon off;"]
