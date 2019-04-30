@@ -6,7 +6,7 @@ const dms2dec =  require('dms2dec')
 const ExifImage = require('exif').ExifImage;
 const globby = require('globby');
 const clean = require('gulp-clean');
-const fs = require('fs')
+const fs = require('fs-extra')
 const {isWithinRange, compareDesc, subSeconds} = require('date-fns')
 const moment = require('moment')
 const yamlFront = require('yaml-front-matter');
@@ -14,6 +14,8 @@ const path = require('path')
 const showdown = require('showdown')
 const { kebabCase, every } = require('lodash')
 const { geocoder } = require('./build/geocoder.js')
+const sm = require('sitemap')
+
 
 const dateFormat = 'YYYY:MM:DD HH:mm:ss'
 
@@ -159,6 +161,21 @@ async function renderStories() {
   await fs.writeFile('./src/components/stories.json', JSON.stringify(stories), () => {})
 }
 
+async function sitemap() {
+    const stories = fs.readJsonSync('./src/components/stories.json')
+    const urls = stories.map((story) => {
+      return { url: '/#/' + story.id, changefreq: 'monthly', priority: 0.7}
+    })
+    urls.push({ url: '/', changefreq: 'monthly', priority: 0.7})
+    var sitemap = sm.createSitemap({
+      hostname: 'https://together.corylogan.com/',
+      cacheTime: 600000,  //600 sec (10 min) cache purge period
+      urls
+    });
+    fs.writeFileSync("static/sitemap.xml", sitemap.toString());
+}
+
 exports.exif = getImageData;
 exports.stories = renderStories;
+exports.sitemap = sitemap;
 exports.default = series(cleanup, scale, optimize, getImageData, renderStories);

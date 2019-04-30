@@ -31,16 +31,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    new PrerenderSPAPlugin({
-      // Required - The path to the webpack-outputted app to prerender.
-      staticDir: path.join(__dirname, 'dist'),
-      // Required - Routes to render.
-      routes: [
-        '/',
-        '/meeting-in-santa-fe-2018-10-15',
-        '/san-francisco-2018-12-16'
-      ],
-    }),
+
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
@@ -119,6 +110,16 @@ const webpackConfig = merge(baseWebpackConfig, {
       async: 'vendor-async',
       children: true,
       minChunks: 3
+    }),
+
+    new PrerenderSPAPlugin({
+      staticDir: path.join(__dirname, 'dist'),
+      routes: [
+        '/',
+        '/meeting-in-santa-fe-2018-10-15',
+        '/san-francisco-2018-12-16',
+        '/packing-up-in-santa-fe-2018-12-27'
+      ],
     }),
 
     // copy custom static assets
