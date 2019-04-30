@@ -1,5 +1,5 @@
 <template>
-  <div class='inspector'>
+  <div class='inspector' ref="inspector">
     <story-index v-if='!storySelected' />
 
     <div v-if='story'>
@@ -45,8 +45,11 @@ export default {
     storySelected() {
       return this.$route.params.id;
     },
+    inspectorWidth() {
+      return this.$refs.inspector.offsetWidth;
+    },
     imageWidth() {
-      return '700';
+      return [700, 1200].find(el => this.inspectorWidth < el);
     },
   },
 };
