@@ -22,7 +22,6 @@ import Navbar from './Navbar';
 export default {
   components: { StoryIndex, Navbar },
   data: () => ({
-    title: 'Nuthin',
   }),
   methods: {
   },
@@ -34,13 +33,19 @@ export default {
         meta: [
           { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
           { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          { name: 'description', content: '' },
+          { name: 'description', content: this.description },
         ],
       };
     }
     return {};
   },
   computed: {
+    description() {
+      if (this.story.description) {
+        return this.story.description;
+      }
+      return `Our time in ${this.story.location}`;
+    },
     ...mapGetters(['story']),
     storySelected() {
       return this.$route.params.id;

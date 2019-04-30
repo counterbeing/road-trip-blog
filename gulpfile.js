@@ -104,6 +104,7 @@ const parseStoryFile = async (file) => {
   return {
     title: obj.title,
     location: obj.location,
+    description: obj.description,
     startDate: new Date(obj.start_date),
     endDate: new Date(obj.end_date),
     date: new Date(obj.date),
