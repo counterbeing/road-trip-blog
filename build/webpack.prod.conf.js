@@ -112,15 +112,15 @@ const webpackConfig = merge(baseWebpackConfig, {
       minChunks: 3
     }),
 
-    // new PrerenderSPAPlugin({
-    //   staticDir: path.join(__dirname, 'dist'),
-    //   routes: [
-    //     '/',
-    //     '/meeting-in-santa-fe-2018-10-15',
-    //     '/san-francisco-2018-12-16',
-    //     '/packing-up-in-santa-fe-2018-12-27'
-    //   ],
-    // }),
+    new PrerenderSPAPlugin({
+      staticDir: path.join(__dirname, '../dist'),
+      routes: [
+        '/',
+        '/meeting-in-santa-fe-2018-10-15',
+        '/san-francisco-2018-12-16',
+        '/packing-up-in-santa-fe-2018-12-27'
+      ],
+    }),
 
     // copy custom static assets
     new CopyWebpackPlugin([

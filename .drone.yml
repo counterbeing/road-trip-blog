@@ -16,9 +16,9 @@ steps:
     image: corylogan/kontena-cli
     envoronment:
       KONTENA_URL:
-        fomr_secret: kontena_url
+        from_secret: kontena_url
       KONTENA_TOKEN:
-        fomr_secret: kontena_api_key
+        from_secret: kontena_api_key
 
     commands:
       - SSL_IGNORE_ERRORS=true kontena stack deploy rails
