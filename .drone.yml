@@ -12,6 +12,16 @@ steps:
       password:
         from_secret: docker_password
 
+  - name: Deploy To Kontena Production
+    image: corylogan/kontena-cli
+    envoronment:
+      KONTENA_URL:
+        fomr_secret: kontena_url
+      KONTENA_TOKEN:
+        fomr_secret: kontena_api_key
+
+    commands:
+      - SSL_IGNORE_ERRORS=true kontena stack deploy rails
 
 branches:
   - master
