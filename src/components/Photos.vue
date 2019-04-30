@@ -2,7 +2,7 @@
   <div id="">
     <h1>photos</h1>
     <div class='photo' v-for='photo in photos' v-bind:key='photo.file'>
-      <img @click='copyDate(photo)' :src="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.700w.jpg'" alt=""/>
+      <img @click='copyDate(photo)' :src="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.' + imageWidth + 'w.jpg'" alt=""/>
     </div>
   </div>
 </template>
@@ -13,6 +13,9 @@ export default {
   computed: {
     photos() {
       return Photos;
+    },
+    imageWidth() {
+      return '700';
     },
   },
   methods: {

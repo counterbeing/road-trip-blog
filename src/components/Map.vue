@@ -14,9 +14,9 @@
         :lat-lng="place.latLng"
         :key='index'>
       </l-marker>
-      <l-marker :icon='cmarker' v-if='story' v-for='(photo, index) in photos'
+      <l-marker :icon='cmarker' v-if='story' v-for='(photo) in photos'
         :lat-lng="photo.latLng"
-        v-bind:key="photo.file + index"
+        v-bind:key="photo.file"
         >
       </l-marker>
     </l-map>
