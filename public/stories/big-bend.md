@@ -1,6 +1,5 @@
 ---
 title: It's Bent, Our Time in Big Bend
-date: 2019-02-07T00:14:01.000Z
 start_date: 2019-02-07T00:14:27.000Z
 end_date: 2019-02-10T20:08:30.000Z
 location: Terlingua, TX
@@ -9,11 +8,11 @@ description: Living out of a bucket. Here we were without a cooler in the back c
 
 This place was spectacular, and without having any idea we nailed the timing.
 
-We showd up mid-week expecting to find some place to camp, but there was one.
+We showed up mid-week expecting to find some place to camp, but there was one.
 Perhaps the timing could have been better in this particular regard. So we wound
 up in the cute little town that is Terlingua. It's got an artsy individualist
 flair, but comes with a warning to not fuck it up. There were stickers
-everywhere saying things like "Don't Marfa my Terlingua". On the coarkboard at
+everywhere saying things like "Don't Marfa my Terlingua". On the corkboard at
 the gas station, the most prominently posted thing was someone offering to
 purchase used water systems.
 

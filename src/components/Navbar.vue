@@ -32,13 +32,14 @@ export default {
     font-weight: bold;
     width: 30%;
     padding: 1em;
-    background-color: #FFF;
+    background-color: #f4511e;
+    color: white;
     transition: 0.2s;
   }
 
   .child:hover {
-    background-color: #f4511e;
-    color: white;
+    color: #2c3e50;
+    background-color: #FFF;
     cursor: pointer;
   }
 </style>

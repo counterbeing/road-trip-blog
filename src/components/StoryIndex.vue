@@ -8,7 +8,7 @@
         :to="{ name: 'Story', params: { id: story.id }}
         ">
         <h2>{{story.title}}</h2>
-        <small>{{ story.date | formatDate}}</small>
+        <small>{{ story.startDate | formatDate}}</small>
       </router-link>
     </ul>
   </div>

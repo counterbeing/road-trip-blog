@@ -21,7 +21,7 @@ steps:
         from_secret: kontena_api_key
 
     commands:
-      - SSL_IGNORE_ERRORS=true kontena stack deploy rails
+      - SSL_IGNORE_ERRORS=true kontena stack deploy together
 
 branches:
   - master

@@ -137,6 +137,7 @@ async function renderStories() {
   })
   stories = await Promise.all(stories)
 
+  // links for previous and next ids
   stories = stories.map((e, i) => {
     let next = stories[i + 1]
     next = next ? next : {}
@@ -146,6 +147,9 @@ async function renderStories() {
   })
 
   stories = stories.map((story, i) => {
+    // const sideTrips = stories.filter(s => {
+    //
+    // })
     const overlaps = stories.filter(s => {
       return isWithinRange(s.startDate, story.startDate, story.endDate) &&
         s.id !== story.id

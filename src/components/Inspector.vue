@@ -4,12 +4,14 @@
 
     <div v-if='story'>
       <Navbar :story="story"/>
-      <h1>{{story.title}}</h1>
-      <div class="body" v-html='story.body'> </div>
-      <div class='photo' v-for='photo in story.photos' v-bind:key='photo.file'>
-        <img :src="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.' + imageWidth + 'w.jpg'" alt="">
-        <figcaption>{{photo.description}}</figcaption>
-      </div>
+      <main>
+        <h1 class='title'>{{story.title}}</h1>
+        <div class="body" v-html='story.body'> </div>
+        <div class='photo' v-for='photo in story.photos' v-bind:key='photo.file'>
+          <img :src="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.' + imageWidth + 'w.jpg'" alt="">
+          <figcaption>{{photo.description}}</figcaption>
+        </div>
+      </main>
       <Navbar :story="story"/>
     </div>
   </div>
@@ -68,6 +70,16 @@ export default {
   width: 40%;
   height: 100%;
   overflow-y: scroll;
+}
+.body {
+  text-align: left;
+  padding: 0 1.5rem;
+  font-size: 1.2rem;
+}
+
+.title {
+  text-align: left;
+  padding: 0 1.5rem;
 }
 
 .photo {
