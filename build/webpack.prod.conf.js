@@ -14,6 +14,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 
+const stories = require('../src/components/stories.json')
+const routes = stories.map(story => `/${story.id}`)
+
 const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -114,12 +117,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 
     new PrerenderSPAPlugin({
       staticDir: path.join(__dirname, '../dist'),
-      routes: [
-        '/',
-        '/meeting-in-santa-fe-2018-10-15',
-        '/san-francisco-2018-12-16',
-        '/packing-up-in-santa-fe-2018-12-27'
-      ],
+      routes: [ '/', ...routes ],
     }),
 
     // copy custom static assets

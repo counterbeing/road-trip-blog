@@ -1,10 +1,11 @@
-FROM alpine:3.9 as builder
+FROM node:10.15.3-stretch as builder
 
-RUN apk add vips-dev fftw-dev build-base --update-cache \
-    --repository https://alpine.global.ssl.fastly.net/alpine/edge/testing/ \
-    --repository https://alpine.global.ssl.fastly.net/alpine/edge/main
-RUN apk add --update nodejs nodejs-npm python
+# RUN apk add vips-dev fftw-dev build-base --update-cache \
+#     --repository https://alpine.global.ssl.fastly.net/alpine/edge/testing/ \
+#     --repository https://alpine.global.ssl.fastly.net/alpine/edge/main
+# RUN apk add --update nodejs nodejs-npm python
 
+RUN apt-get update && apt-get install -y libvips-dev python libxss1
 
 # Copy our source code into the container
 COPY package*.json ./
