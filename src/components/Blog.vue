@@ -2,7 +2,7 @@
   <div id='blog'>
     <Inspector />
     <Map />
-    <Navbar :story="story" class='desktop-hidden'/>
+    <Navbar v-if="story" :story="story" class='desktop-hidden'/>
   </div>
 </template>
 <script>
