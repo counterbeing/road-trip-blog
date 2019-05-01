@@ -34,6 +34,9 @@ export default {
 </script>
 
 <style>
+  #story-index {
+    text-align: center;
+  }
   ul {
     list-style: none;
     padding: 0;
