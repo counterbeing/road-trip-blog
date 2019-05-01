@@ -39,4 +39,9 @@ COPY --from=builder /dist/ /var/www/html/
 RUN ls /var/www/html
 
 RUN chown nginx:nginx /var/www/html
+
+# Log to stdout
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+	&& ln -sf /dev/stderr /var/log/nginx/error.log
+
 CMD ["nginx", "-g", "daemon off;"]
