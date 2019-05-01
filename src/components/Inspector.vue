@@ -12,7 +12,7 @@
           <figcaption>{{photo.description}}</figcaption>
         </div>
       </main>
-      <Navbar :story="story"/>
+      <Navbar :story="story" class='mobile-hidden'/>
     </div>
   </div>
 </template>
@@ -42,13 +42,13 @@ export default {
     return {};
   },
   computed: {
+    ...mapGetters(['story']),
     description() {
       if (this.story.description) {
         return this.story.description;
       }
       return `Our time in ${this.story.location}`;
     },
-    ...mapGetters(['story']),
     storySelected() {
       return this.$route.params.id;
     },
@@ -92,6 +92,17 @@ export default {
 
 figcaption {
   padding-bottom: 1em;
+}
+
+@media only screen and (max-width: 700px) {
+  .inspector {
+    position: static;
+    width: 100%;
+  }
+  .mobile-hidden {
+    display: none !important;
+  }
+
 }
 
 </style>

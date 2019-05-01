@@ -1,19 +1,23 @@
 <template>
   <div id='blog'>
-    <Map />
     <Inspector />
+    <Map />
+    <Navbar :story="story"/ class='desktop-hidden'>
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
-import Map from './Map';
+import { mapActions, mapGetters } from 'vuex';
 import Inspector from './Inspector';
+import Map from './Map';
+import Navbar from './Navbar';
 // import Stories from './stories.json';
 
 export default {
   data: () => ({ }),
-  components: { Map, Inspector },
-  computed: { },
+  components: { Map, Inspector, Navbar },
+  computed: {
+    ...mapGetters(['story']),
+  },
   methods: {
     ...mapActions(['setStory']),
   },
@@ -27,8 +31,13 @@ export default {
   },
 };
 </script>
-
 <style>
   #blog {
   }
+
+@media only screen and (min-width: 700px) {
+  .desktop-hidden {
+    display: none !important;
+  }
+}
 </style>

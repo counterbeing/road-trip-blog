@@ -121,6 +121,7 @@ export default {
 
 <style>
 @import 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.css';
+
 .map-container {
   position: absolute;
   width: 60%;
@@ -133,5 +134,14 @@ export default {
 .leaflet-container {
   width: 100%;
   height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .map-container {
+    pointer-events: none;
+    position: static;
+    width: 100%;
+    height: 400px;
+  }
 }
 </style>
