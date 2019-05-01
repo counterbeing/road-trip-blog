@@ -97,6 +97,8 @@ export default {
 }
 
 figcaption {
+  padding-left:1.5rem;
+  padding-right:1.5rem;
   padding-bottom: 1em;
 }
 
