@@ -14,6 +14,8 @@ steps:
       KONTENA_GRID: prod
       SSL_IGNORE_ERRORS: true
     commands:
+      - export SHITE='SHITE'
+      - echo "$SHITE"
       - echo "$KONTENA_URL"
       - kontena stack deploy together
   - name: docker
