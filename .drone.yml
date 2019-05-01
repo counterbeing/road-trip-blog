@@ -1,7 +1,21 @@
 kind: pipeline
 name: default
 
+
 steps:
+
+  - name: Deploy Test
+    image: kontena/cli
+    envoronment:
+      KONTENA_URL:
+        from_secret: kontena_url
+      KONTENA_TOKEN:
+        from_secret: kontena_token
+      KONTENA_GRID: prod
+      SSL_IGNORE_ERRORS: true
+    commands:
+      - echo $KONTENA_URL
+      - kontena stack deploy together
   - name: docker
     image: plugins/docker
     settings:
@@ -21,7 +35,6 @@ steps:
         from_secret: kontena_token
       KONTENA_GRID: prod
       SSL_IGNORE_ERRORS: true
-
     commands:
       - kontena stack deploy together
 
