@@ -27,6 +27,7 @@ export default {
     flex-wrap: no-wrap;
     align-content: space-evenly;
     padding: 0;
+    text-align: center;
   }
   .child {
     font-weight: bold;

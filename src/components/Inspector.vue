@@ -6,6 +6,7 @@
       <Navbar :story="story"/>
       <main>
         <h1 class='title'>{{story.title}}</h1>
+        <h2 class='title'><time :datetime="story.startDate">{{story.startDate | formatDate}}</time></h2>
         <div class="body" v-html='story.body'> </div>
         <div class='photo' v-for='photo in story.photos' v-bind:key='photo.file'>
           <img v-lazy="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.' + imageWidth + 'w.jpg'" alt="">
@@ -64,6 +65,7 @@ export default {
 <style>
 
 .inspector {
+  text-align: left;
   position: absolute;
   top: 0;
   right: 0;
