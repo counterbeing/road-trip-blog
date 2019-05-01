@@ -109,7 +109,6 @@ const parseStoryFile = async (file) => {
     description: obj.description,
     startDate: new Date(obj.start_date),
     endDate: new Date(obj.end_date),
-    date: new Date(obj.date),
     body: processMarkdown(obj.__content)
   }
 
@@ -129,7 +128,7 @@ async function renderStories() {
     const photosWithLocation = photos.filter((p) => p.lat)
     const lat = photosWithLocation.reduce((a, e) => a + e.lat, 0) / photosWithLocation.length
     const lng = photosWithLocation.reduce((a, e) => a + e.lng, 0) / photosWithLocation.length
-    const id = kebabCase(e.title + moment(e.date).format('YYYY-MM-DD'))
+    const id = kebabCase(e.title + moment(e.startDate).format('YYYY-MM-DD'))
     const place = await geocoder(e.location)
 
     const latLng = place.results[0].location
