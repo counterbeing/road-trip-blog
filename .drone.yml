@@ -14,7 +14,7 @@ steps:
       KONTENA_GRID: prod
       SSL_IGNORE_ERRORS: true
     commands:
-      - echo $KONTENA_URL
+      - echo "$KONTENA_URL"
       - kontena stack deploy together
   - name: docker
     image: plugins/docker
