@@ -6,12 +6,13 @@ import moment from 'moment';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
 import Meta from 'vue-meta';
+import VueLazyload from 'vue-lazyload';
 import 'leaflet/dist/leaflet.css';
 import App from './App';
 import store from './store';
 
-
 Vue.use(Meta);
+Vue.use(VueLazyload);
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
