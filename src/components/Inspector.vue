@@ -6,7 +6,9 @@
       <Navbar :story="story"/>
       <main>
         <h1 class='title'>{{story.title}}</h1>
-        <h2 class='title'><time :datetime="story.startDate">{{story.startDate | formatDate}}</time></h2>
+        <h2 class='title'>
+          <date-range :start="story.startDate" :end="story.endDate"/>
+        </h2>
         <div class="body" v-html='story.body'> </div>
         <div class='photo' v-for='photo in story.photos' v-bind:key='photo.file'>
           <img v-lazy="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.' + imageWidth + 'w.jpg'" alt="">
@@ -20,10 +22,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import StoryIndex from './StoryIndex';
-import Navbar from './Navbar';
+import Navbar from './micro/Navbar';
+import DateRange from './micro/DateRange';
+
 
 export default {
-  components: { StoryIndex, Navbar },
+  components: { StoryIndex, Navbar, DateRange },
   data: () => ({
   }),
   methods: {

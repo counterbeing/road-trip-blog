@@ -8,7 +8,9 @@
         :to="{ name: 'Story', params: { id: story.id }}
         ">
         <h2>{{story.title}}</h2>
-        <small>{{ story.startDate | formatDate}}</small>
+        <small>
+          <date-range :start="story.startDate" :end="story.endDate"/>
+        </small>
       </router-link>
     </ul>
   </div>
@@ -16,8 +18,10 @@
 
 <script>
 import Stories from './stories.json';
+import DateRange from './micro/DateRange';
 
 export default {
+  components: { DateRange },
   data: () => ({
     stories: Stories,
   }),

@@ -9,7 +9,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import Inspector from './Inspector';
 import Map from './Map';
-import Navbar from './Navbar';
+import Navbar from './micro/Navbar';
 // import Stories from './stories.json';
 
 export default {
