@@ -1,4 +1,3 @@
-/* global ga */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
@@ -8,9 +7,14 @@ import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
 import Meta from 'vue-meta';
 import VueLazyload from 'vue-lazyload';
+import VueAnalytics from 'vue-analytics';
 import 'leaflet/dist/leaflet.css';
 import App from './App';
 import store from './store';
+
+Vue.use(VueAnalytics, {
+  id: 'UA-19114773-13',
+});
 
 Vue.use(Meta);
 Vue.use(VueLazyload);
@@ -35,14 +39,6 @@ Vue.config.productionTip = false;
 
 Vue.filter('formatDate', value => moment(value).format('LL'));
 
-
-ga('set', 'page', router.currentRoute.path);
-ga('send', 'pageview');
-
-router.afterEach((to) => {
-  ga('set', 'page', to.path);
-  ga('send', 'pageview');
-});
 
 /* eslint-disable no-new */
 new Vue({
