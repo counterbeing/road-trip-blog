@@ -49,8 +49,22 @@ export default {
     padding: 1em;
     background-color: #FFF;
     transition: 0.2s;
+    cursor: pointer;
   }
 
+  @media (pointer: fine) {
+    li:hover {
+      background-color: #f4511e;
+      color: white;
+    }
+  }
+  @media (pointer: coarse) {
+
+    li:active {
+      background-color: #f4511e;
+      color: white;
+    }
+  }
   li:hover {
     background-color: #f4511e;
     color: white;

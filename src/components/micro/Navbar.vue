@@ -18,7 +18,6 @@
 <script>
 export default {
   props: ['story'],
-  // data: () => ({ }),
 };
 </script>
 <style scoped>
@@ -30,17 +29,26 @@ export default {
     text-align: center;
   }
   .child {
-    font-weight: bold;
-    width: 30%;
-    padding: 1em;
     background-color: #f4511e;
     color: white;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 1em;
     transition: 0.2s;
+    width: 30%;
   }
 
-  .child:hover {
-    color: #2c3e50;
-    background-color: #FFF;
-    cursor: pointer;
+  @media (pointer: fine) {
+    .child:hover {
+      color: #2c3e50;
+      background-color: #FFF;
+    }
   }
+  @media (pointer: coarse) {
+    .child:active {
+      color: #2c3e50;
+      background-color: #FFF;
+    }
+  }
+
 </style>
