@@ -52,14 +52,13 @@ export default {
     cursor: pointer;
   }
 
-  @media (pointer: fine) {
+  @media (hover: hover) {
     li:hover {
       background-color: #f4511e;
       color: white;
     }
   }
-  @media (pointer: coarse) {
-
+  @media (hover: none) {
     li:active {
       background-color: #f4511e;
       color: white;
