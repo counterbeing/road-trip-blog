@@ -1,3 +1,4 @@
+/* global ga */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
@@ -34,6 +35,14 @@ Vue.config.productionTip = false;
 
 Vue.filter('formatDate', value => moment(value).format('LL'));
 
+
+ga('set', 'page', router.currentRoute.path);
+ga('send', 'pageview');
+
+router.afterEach((to) => {
+  ga('set', 'page', to.path);
+  ga('send', 'pageview');
+});
 
 /* eslint-disable no-new */
 new Vue({
