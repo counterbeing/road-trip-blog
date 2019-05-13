@@ -5,4 +5,4 @@ end_date: 2019-06-30T00:00:00.000Z
 location: Charleston, WV
 ---
 
-We made it to Charleston, and within about three days had a furnished apartment. It's not bad at all.
+We made it to Charleston, and within about three days had a furnished apartment. It's not bad at all. In fact, it's wonderful.

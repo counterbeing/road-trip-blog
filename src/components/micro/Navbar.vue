@@ -1,16 +1,10 @@
 <template>
-  <div class='parent'>
-    <router-link
-      tag='div'
-      class='child'
-      :to="{name: 'Story', params: {id: story.previousId}}">
+  <div class="parent">
+    <router-link tag="div" class="child" :to="{ name: 'Story', params: { id: story.nextId } }">
       Previous
     </router-link>
-    <router-link tag='div' class='child' to='/'>Index</router-link>
-    <router-link
-      tag='div'
-      class='child'
-      :to="{name: 'Story', params: {id: story.nextId}}">
+    <router-link tag="div" class="child" to="/">Index</router-link>
+    <router-link tag="div" class="child" :to="{ name: 'Story', params: { id: story.previousId } }">
       Next
     </router-link>
   </div>
@@ -21,34 +15,33 @@ export default {
 };
 </script>
 <style scoped>
-  .parent {
-    display: flex;
-    flex-wrap: no-wrap;
-    align-content: space-evenly;
-    padding: 0;
-    text-align: center;
-  }
-  .child {
-    background-color: #f4511e;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    padding: 1em;
-    transition: 0.2s;
-    width: 30%;
-  }
+.parent {
+  display: flex;
+  flex-wrap: no-wrap;
+  align-content: space-evenly;
+  padding: 0;
+  text-align: center;
+}
+.child {
+  background-color: #f4511e;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 1em;
+  transition: 0.2s;
+  width: 30%;
+}
 
-  @media (pointer: fine) {
-    .child:hover {
-      color: #2c3e50;
-      background-color: #FFF;
-    }
+@media (pointer: fine) {
+  .child:hover {
+    color: #2c3e50;
+    background-color: #fff;
   }
-  @media (pointer: coarse) {
-    .child:active {
-      color: #2c3e50;
-      background-color: #FFF;
-    }
+}
+@media (pointer: coarse) {
+  .child:active {
+    color: #2c3e50;
+    background-color: #fff;
   }
-
+}
 </style>

@@ -6,4 +6,4 @@ location: Slade, KY
 description: Our second longer visit to the Red River Gorge.
 ---
 
-Climbing and such woo..
+This time we had things a bit more down pat.
