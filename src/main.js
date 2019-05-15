@@ -14,6 +14,7 @@ import store from './store';
 
 Vue.use(VueAnalytics, {
   id: 'UA-19114773-13',
+  router,
 });
 
 Vue.use(Meta);
@@ -38,7 +39,6 @@ Icon.Default.mergeOptions({
 Vue.config.productionTip = false;
 
 Vue.filter('formatDate', value => moment(value).format('LL'));
-
 
 /* eslint-disable no-new */
 new Vue({

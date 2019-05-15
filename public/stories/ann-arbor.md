@@ -6,4 +6,5 @@ location: Ann Arbor, MI
 description: We attended Thea's graduation in Ann Arbor Michigan.
 ---
 
-We adventured north to watch Katie's cousin Thea graduate from law school, touch the water of a Great Lake and visit Cory's great aunt Avice on the way home.
+We adventured north to watch Katie's cousin Thea graduate from law school, touch
+the water of a Great Lake and visit Cory's great aunt Avice on the way home.
