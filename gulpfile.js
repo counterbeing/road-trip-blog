@@ -146,9 +146,6 @@ async function renderStories() {
   })
 
   stories = stories.map((story, i) => {
-    // const sideTrips = stories.filter(s => {
-    //
-    // })
     const overlaps = stories.filter(s => {
       return isWithinRange(s.startDate, story.startDate, story.endDate) &&
         s.id !== story.id
@@ -167,7 +164,7 @@ async function renderStories() {
 async function sitemap() {
     const stories = fs.readJsonSync('./src/components/stories.json')
     const urls = stories.map((story) => {
-      return { url: '/' + story.id, changefreq: 'monthly', priority: 0.7}
+      return { url: '/' + story.id + '/', changefreq: 'monthly', priority: 0.7}
     })
     urls.push({ url: '/', changefreq: 'monthly', priority: 0.7})
     var sitemap = sm.createSitemap({
