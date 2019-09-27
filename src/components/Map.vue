@@ -115,7 +115,6 @@ export default {
       }
     },
     updateInspector(story) {
-      console.log(story.id);
       this.$router
         .push({ name: "Story", params: { id: story.id } })
         .catch(err => {});

@@ -44,7 +44,7 @@ export default {
 
   watch: {
     $route(to) {
-      console.log(to);
+      // console.log(to);
       this.setStory(to.params.id);
     }
   },
