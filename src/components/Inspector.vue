@@ -2,7 +2,7 @@
   <div class="inspector" ref="inspector">
     <story-index v-if="!storySelected" />
 
-    <div v-if="story">
+    <div v-if="storySelectedAndLoaded">
       <Navbar :story="story" />
       <main>
         <h1 class="title">{{ story.title }}</h1>
@@ -40,9 +40,25 @@ import DateRange from "./micro/DateRange";
 
 export default {
   components: { StoryIndex, Navbar, DateRange },
-  data: () => ({}),
+  data: () => ({
+    story: null
+  }),
   methods: {
-    ...mapActions(["setStory"])
+    async fetchData() {
+      if (!this.storySelected) return;
+      const id = this.$route.params.id;
+      const response = await fetch(
+        `https://road-trip-blog.s3.amazonaws.com/${id}.json`
+      );
+      const json = await response.json();
+      this.story = json;
+    }
+  },
+  created() {
+    this.fetchData();
+  },
+  watch: {
+    $route: "fetchData"
   },
   metaInfo() {
     if (this.story) {
@@ -59,8 +75,6 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["story"]),
-
     description() {
       if (this.story.description) {
         return this.story.description;
@@ -69,6 +83,9 @@ export default {
     },
     storySelected() {
       return this.$route.params.id;
+    },
+    storySelectedAndLoaded() {
+      return this.storySelected && this.story;
     },
     inspectorWidth() {
       return this.$refs.inspector.offsetWidth;

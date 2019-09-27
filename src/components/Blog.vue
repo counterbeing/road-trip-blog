@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import Inspector from "./Inspector";
 import Map from "./Map";
 import Navbar from "./micro/Navbar";
@@ -16,40 +16,6 @@ export default {
   components: { Map, Inspector, Navbar },
   computed: {
     ...mapGetters(["story"])
-  },
-
-  methods: {
-    ...mapActions(["setStory"])
-  },
-
-  // beforeRouteEnter(to, from, next) {
-  //   console.log("ENTER");
-  //   if (to.params.id) {
-  //     this.setStory(to.params.id);
-  //   } else {
-  //     this.setStory(null);
-  //   }
-  //   next();
-  // },
-  //
-  // beforeRouteUpdate(to, from, next) {
-  //   console.log("UPDATE");
-  //   if (to.params.id) {
-  //     this.setStory(to.params.id);
-  //   } else {
-  //     this.setStory(null);
-  //   }
-  //   next();
-  // }
-
-  watch: {
-    $route(to) {
-      // console.log(to);
-      this.setStory(to.params.id);
-    }
-  },
-  mounted() {
-    this.setStory(this.$route.params.id);
   }
 };
 </script>
