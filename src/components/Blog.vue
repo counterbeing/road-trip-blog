@@ -6,10 +6,10 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import Inspector from "./Inspector";
-import Map from "./Map";
-import Navbar from "./micro/Navbar";
+import { mapGetters } from "vuex"
+import Inspector from "./Inspector"
+import Map from "./Map"
+import Navbar from "./micro/Navbar"
 
 export default {
   data: () => ({}),
@@ -17,7 +17,7 @@ export default {
   computed: {
     ...mapGetters(["story"])
   }
-};
+}
 </script>
 <style>
 #blog {

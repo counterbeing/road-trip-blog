@@ -5,22 +5,22 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   name: "App",
   async created() {
     const response = await fetch(
       "https://road-trip-blog.s3.amazonaws.com/storiesIndex.json"
-    );
+    )
 
-    const json = await response.json();
-    this.setStories(json);
+    const json = await response.json()
+    this.setStories(json)
   },
   methods: {
     ...mapActions(["setStories"])
   }
-};
+}
 </script>
 
 <style>

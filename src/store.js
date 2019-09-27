@@ -1,7 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from "vue"
+import Vuex from "vuex"
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -10,15 +10,15 @@ export default new Vuex.Store({
   },
   mutations: {
     setStory(state, story) {
-      state.currentStory = story;
+      state.currentStory = story
     },
     setStories(state, stories) {
-      state.stories = stories;
+      state.stories = stories
     }
   },
   actions: {
     setStory: (context, payload) => {
-      context.commit("setStory", payload);
+      context.commit("setStory", payload)
     },
 
     setStories: (context, payload) => context.commit("setStories", payload)
@@ -30,4 +30,4 @@ export default new Vuex.Store({
         (a, b) => new Date(b.startDate) - new Date(a.startDate)
       )
   }
-});
+})

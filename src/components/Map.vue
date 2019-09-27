@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import L from "leaflet";
-import { max, min } from "lodash";
-import { mapActions, mapGetters } from "vuex";
+import L from "leaflet"
+import { max, min } from "lodash"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   name: "Map",
@@ -57,7 +57,7 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       }
-    };
+    }
   },
   computed: {
     ...mapGetters(["story", "stories"]),
@@ -65,35 +65,35 @@ export default {
       return this.stories.map(story => ({
         story,
         latLng: L.latLng(story.lat, story.lng)
-      }));
+      }))
     },
     photos() {
-      if (!this.story || !this.story.photos) return [];
+      if (!this.story || !this.story.photos) return []
       return this.story.photos
         .filter(p => p.lat)
         .map(photo => ({
           photo,
           latLng: L.latLng(photo.lat, photo.lng)
-        }));
+        }))
     },
     photoBounds() {
-      const latitudes = this.photos.map(p => p.latLng.lat);
-      const longitudes = this.photos.map(p => p.latLng.lng);
-      const corner1 = L.latLng(max(latitudes), max(longitudes));
-      const corner2 = L.latLng(min(latitudes), min(longitudes));
-      return L.latLngBounds(corner1, corner2);
+      const latitudes = this.photos.map(p => p.latLng.lat)
+      const longitudes = this.photos.map(p => p.latLng.lng)
+      const corner1 = L.latLng(max(latitudes), max(longitudes))
+      const corner2 = L.latLng(min(latitudes), min(longitudes))
+      return L.latLngBounds(corner1, corner2)
     },
     storyBounds() {
-      const latitudes = this.places.map(p => p.latLng.lat);
-      const longitudes = this.places.map(p => p.latLng.lng);
-      const corner1 = L.latLng(max(latitudes), max(longitudes));
-      const corner2 = L.latLng(min(latitudes), min(longitudes));
-      return L.latLngBounds(corner1, corner2);
+      const latitudes = this.places.map(p => p.latLng.lat)
+      const longitudes = this.places.map(p => p.latLng.lng)
+      const corner1 = L.latLng(max(latitudes), max(longitudes))
+      const corner2 = L.latLng(min(latitudes), min(longitudes))
+      return L.latLngBounds(corner1, corner2)
     }
   },
   watch: {
     story() {
-      this.updateMapBounds();
+      this.updateMapBounds()
     }
   },
   mounted() {
@@ -106,27 +106,27 @@ export default {
           padding: [1, 1],
           maxZoom: 12,
           animate: true
-        });
+        })
       } else {
         this.$refs.map.mapObject.fitBounds(this.photoBounds, {
           padding: [1, 1],
           maxZoom: 12
-        });
+        })
       }
     },
     updateInspector(story) {
       this.$router
         .push({ name: "Story", params: { id: story.id } })
-        .catch(err => {});
+        .catch(err => {})
     },
     zoomUpdate(zoom) {
-      this.currentZoom = zoom;
+      this.currentZoom = zoom
     },
     centerUpdate(center) {
-      this.currentCenter = center;
+      this.currentCenter = center
     }
   }
-};
+}
 </script>
 
 <style>

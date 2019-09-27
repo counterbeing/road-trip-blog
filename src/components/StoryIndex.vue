@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import DateRange from "./micro/DateRange";
-import { mapGetters } from "vuex";
+import DateRange from "./micro/DateRange"
+import { mapGetters } from "vuex"
 
 export default {
   components: { DateRange },
@@ -41,7 +41,7 @@ export default {
       }
     ]
   }
-};
+}
 </script>
 
 <style>

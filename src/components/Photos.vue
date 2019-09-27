@@ -19,32 +19,32 @@ export default {
   data() {
     return {
       photos: []
-    };
+    }
   },
   async created() {
     const response = await fetch(
       "https://road-trip-blog.s3.amazonaws.com/photosIndex.json"
-    );
-    const json = await response.json();
-    this.photos = json;
+    )
+    const json = await response.json()
+    this.photos = json
   },
   computed: {
     imageWidth() {
-      return "250";
+      return "250"
     }
   },
 
   methods: {
     copyDate(photo) {
-      const el = document.createElement("textarea");
-      el.value = photo.date;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
+      const el = document.createElement("textarea")
+      el.value = photo.date
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand("copy")
+      document.body.removeChild(el)
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -1,14 +1,14 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Blog from "@/components/Blog";
-import Photos from "@/components/Photos";
+import Vue from "vue"
+import Router from "vue-router"
+import Blog from "@/components/Blog"
+import Photos from "@/components/Photos"
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   mode: "history",
   scrollBehavior() {
-    return { x: 0, y: 0 };
+    return { x: 0, y: 0 }
   },
   routes: [
     {
@@ -27,4 +27,4 @@ export default new Router({
       component: Blog
     }
   ]
-});
+})
