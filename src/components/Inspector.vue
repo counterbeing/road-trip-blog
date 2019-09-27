@@ -1,53 +1,66 @@
 <template>
-  <div class='inspector' ref="inspector">
-    <story-index v-if='!storySelected' />
+  <div class="inspector" ref="inspector">
+    <story-index v-if="!storySelected" />
 
-    <div v-if='story'>
-      <Navbar :story="story"/>
+    <div v-if="story">
+      <Navbar :story="story" />
       <main>
-        <h1 class='title'>{{story.title}}</h1>
-        <h2 class='title'>
-          <date-range :start="story.startDate" :end="story.endDate"/>
+        <h1 class="title">{{ story.title }}</h1>
+        <h2 class="title">
+          <date-range :start="story.startDate" :end="story.endDate" />
         </h2>
-        <div class="body" v-html='story.body'> </div>
-        <div class='photo' v-for='photo in story.photos' v-bind:key='photo.file'>
-          <img v-lazy="'https://s3.amazonaws.com/road-trip-blog/' + photo.file.split('.')[0] + '.' + imageWidth + 'w.jpg'" alt="">
-          <figcaption>{{photo.description}}</figcaption>
+        <div class="body" v-html="story.body"></div>
+        <div
+          class="photo"
+          v-for="photo in story.photos"
+          v-bind:key="photo.file"
+        >
+          <img
+            v-lazy="
+              'https://s3.amazonaws.com/road-trip-blog/' +
+                photo.file.split('.')[0] +
+                '-w' +
+                imageWidth +
+                '.webp'
+            "
+            alt=""
+          />
+          <figcaption>{{ photo.description }}</figcaption>
         </div>
       </main>
-      <Navbar :story="story" class='mobile-hidden'/>
+      <Navbar :story="story" class="mobile-hidden" />
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import StoryIndex from './StoryIndex';
-import Navbar from './micro/Navbar';
-import DateRange from './micro/DateRange';
-
+import { mapGetters, mapActions } from "vuex";
+import StoryIndex from "./StoryIndex";
+import Navbar from "./micro/Navbar";
+import DateRange from "./micro/DateRange";
 
 export default {
   components: { StoryIndex, Navbar, DateRange },
-  data: () => ({
-  }),
+  data: () => ({}),
   methods: {
+    ...mapActions(["setStory"])
   },
   metaInfo() {
     if (this.story) {
       return {
         title: this.story.title,
-        titleTemplate: '%s ← Katie and Cory go places together',
+        titleTemplate: "%s ← Katie and Cory go places together",
         meta: [
-          { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
-          { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-          { name: 'description', content: this.description },
-        ],
+          { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "description", content: this.description }
+        ]
       };
     }
     return {};
   },
   computed: {
-    ...mapGetters(['story']),
+    ...mapGetters(["story"]),
+
     description() {
       if (this.story.description) {
         return this.story.description;
@@ -61,13 +74,12 @@ export default {
       return this.$refs.inspector.offsetWidth;
     },
     imageWidth() {
-      return [700, 1200].find(el => this.inspectorWidth < el);
-    },
-  },
+      return [2100, 1600, 1200, 700, 250].find(el => this.inspectorWidth < el);
+    }
+  }
 };
 </script>
 <style>
-
 .inspector {
   text-align: left;
   position: absolute;
@@ -97,8 +109,8 @@ export default {
 }
 
 figcaption {
-  padding-left:1.5rem;
-  padding-right:1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   padding-bottom: 1em;
 }
 
@@ -110,7 +122,5 @@ figcaption {
   .mobile-hidden {
     display: none !important;
   }
-
 }
-
 </style>

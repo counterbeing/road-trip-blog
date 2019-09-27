@@ -18,26 +18,29 @@
 </template>
 
 <script>
-import Stories from './stories.json';
-import DateRange from './micro/DateRange';
+import DateRange from "./micro/DateRange";
+import { mapGetters } from "vuex";
 
 export default {
   components: { DateRange },
-  data: () => ({
-    stories: Stories.sort((a, b) => new Date(b.startDate) - new Date(a.startDate)),
-  }),
-  metaInfo: {
-    title: 'Index of Places',
-    titleTemplate: '%s ← Katie and Cory go places together',
-    meta: [
-      { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        name: 'description',
-        content: "The index of places we've gone together. Links to click and explore the map.",
-      },
-    ],
+  computed: {
+    ...mapGetters(["stories"])
   },
+  data: () => ({}),
+
+  metaInfo: {
+    title: "Index of Places",
+    titleTemplate: "%s ← Katie and Cory go places together",
+    meta: [
+      { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        name: "description",
+        content:
+          "The index of places we've gone together. Links to click and explore the map."
+      }
+    ]
+  }
 };
 </script>
 

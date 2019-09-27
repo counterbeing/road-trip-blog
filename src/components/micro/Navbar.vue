@@ -1,17 +1,27 @@
 <template>
   <div class="parent">
-    <router-link tag="div" class="child" :to="{ name: 'Story', params: { id: story.nextId } }">
+    <router-link
+      tag="div"
+      class="child"
+      :to="{ name: 'Story', params: { id: story.nextId } }"
+    >
       Previous
     </router-link>
-    <router-link tag="div" class="child" to="/">Index</router-link>
-    <router-link tag="div" class="child" :to="{ name: 'Story', params: { id: story.previousId } }">
+    <router-link tag="div" class="child" :to="{ name: 'Blog Index' }"
+      >Index</router-link
+    >
+    <router-link
+      tag="div"
+      class="child"
+      :to="{ name: 'Story', params: { id: story.previousId } }"
+    >
       Next
     </router-link>
   </div>
 </template>
 <script>
 export default {
-  props: ['story'],
+  props: ["story"]
 };
 </script>
 <style scoped>
