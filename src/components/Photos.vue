@@ -15,8 +15,6 @@
   </div>
 </template>
 <script>
-import Photos from "./photos.json";
-
 export default {
   data() {
     return {
