@@ -31,6 +31,7 @@ export default {
   align-content: space-evenly;
   padding: 0;
   text-align: center;
+  user-select: none;
 }
 .child {
   background-color: #f4511e;

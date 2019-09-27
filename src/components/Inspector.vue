@@ -44,6 +44,7 @@ export default {
     story: null
   }),
   methods: {
+    ...mapActions(["setStory"]),
     async fetchData() {
       if (!this.storySelected) return;
       const id = this.$route.params.id;
@@ -52,6 +53,7 @@ export default {
       );
       const json = await response.json();
       this.story = json;
+      this.setStory(json);
     }
   },
   created() {

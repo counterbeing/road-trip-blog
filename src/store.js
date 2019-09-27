@@ -17,13 +17,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setStory: async (context, payload) => {
-      if (!payload) return;
-      const response = await fetch(
-        `https://road-trip-blog.s3.amazonaws.com/${payload}.json`
-      );
-      const json = await response.json();
-      context.commit("setStory", json);
+    setStory: (context, payload) => {
+      context.commit("setStory", payload);
     },
 
     setStories: (context, payload) => context.commit("setStories", payload)
