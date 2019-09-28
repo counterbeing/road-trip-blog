@@ -15,6 +15,7 @@
     "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.16.4",
+    "vue-dplayer": "^0.0.10",
     "vue-lazyload": "^1.2.6",
     "vue-meta": "^2.2.2",
     "vue-router": "^3.0.3",

@@ -11,13 +11,31 @@
       "
       alt=""
     />
+    <d-player v-if="isVideo" :options="options"> </d-player>
+
     <figcaption>{{ media.description }}</figcaption>
   </div>
 </template>
 <script>
+import VueDPlayer from "vue-dplayer"
+import "vue-dplayer/dist/vue-dplayer.css"
+
 export default {
   name: "Media",
-  data: () => ({}),
+  data() {
+    return {
+      options: {
+        video: {
+          url: "https://s3.amazonaws.com/road-trip-blog/" + this.media.file
+        },
+        autoplay: false
+      },
+      player: null
+    }
+  },
+  components: {
+    "d-player": VueDPlayer
+  },
   props: ["media", "imageWidth"],
   computed: {
     resource() {
@@ -33,6 +51,11 @@ export default {
     photoResource() {
       return this.media.file.split(".")[0] + "-w" + this.imageWidth + ".webp"
     }
+    // options() {
+    //   {
+    //     ("http://static.smartisanos.cn/common/video/t1-ui.mp4")
+    //   }
+    // }
   }
 }
 </script>
