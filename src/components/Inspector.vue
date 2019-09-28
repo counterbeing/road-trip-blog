@@ -15,17 +15,7 @@
           v-for="photo in story.photos"
           v-bind:key="photo.file"
         >
-          <img
-            v-lazy="
-              'https://s3.amazonaws.com/road-trip-blog/' +
-                photo.file.split('.')[0] +
-                '-w' +
-                imageWidth +
-                '.webp'
-            "
-            alt=""
-          />
-          <figcaption>{{ photo.description }}</figcaption>
+          <media :media="photo" :imageWidth="imageWidth" />
         </div>
       </main>
       <Navbar :story="story" class="mobile-hidden" />
@@ -37,9 +27,10 @@ import { mapGetters, mapActions } from "vuex"
 import StoryIndex from "./StoryIndex"
 import Navbar from "./micro/Navbar"
 import DateRange from "./micro/DateRange"
+import Media from "./micro/Media"
 
 export default {
-  components: { StoryIndex, Navbar, DateRange },
+  components: { StoryIndex, Navbar, DateRange, Media },
   data: () => ({
     story: null
   }),
