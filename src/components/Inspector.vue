@@ -46,7 +46,10 @@ export default {
   methods: {
     ...mapActions(["setStory"]),
     async fetchData() {
-      if (!this.storySelected) return
+      if (!this.storySelected) {
+        this.setStory(null)
+        return;
+      }
       const id = this.$route.params.id
       const response = await fetch(
         `https://road-trip-blog.s3.amazonaws.com/${id}.json`
