@@ -4,7 +4,7 @@
       v-if="isPhoto"
       v-lazy="
         'https://s3.amazonaws.com/road-trip-blog/' +
-          media.file.split('.')[0] +
+          media.file +
           '-w' +
           imageWidth +
           '.webp'
@@ -29,24 +29,18 @@ export default {
 
   props: ["media", "imageWidth"],
   computed: {
-    resource() {
-      if (this.isPhoto) return this.photoResource
-      return;
-    },
     isVideo() {
-      return !this.isPhoto
+      return this.media.contentType == "video/x-m4v"
     },
     isPhoto() {
-      return this.media.file.split(".")[1] == "jpg"
+      return this.media.contentType == "image/webp"
+    },
+    isPano() {
+      return this.isPhoto && this.media.width / this.media.height > 1.5
     },
     photoResource() {
-      return this.media.file.split(".")[0] + "-w" + this.imageWidth + ".webp"
+      return this.media.file.split + "-w" + this.imageWidth + ".webp"
     }
-    // options() {
-    //   {
-    //     ("http://static.smartisanos.cn/common/video/t1-ui.mp4")
-    //   }
-    // }
   }
 }
 </script>
