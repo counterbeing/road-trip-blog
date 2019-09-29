@@ -1,6 +1,6 @@
 const webpack = require("webpack")
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+//   .BundleAnalyzerPlugin
 const PrerenderSPAPlugin = require("prerender-spa-plugin")
 const path = require("path")
 // const stories = require("../src/components/stories.json")
@@ -10,7 +10,7 @@ module.exports = {
   runtimeCompiler: true,
   configureWebpack: {
     plugins: [
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, "../dist"),
