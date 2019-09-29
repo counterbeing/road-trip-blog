@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue"
 import router from "@/router"
-import moment from "moment"
+import { format } from "date-fns"
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet"
 import { Icon } from "leaflet"
 import Meta from "vue-meta"
@@ -38,7 +38,7 @@ Icon.Default.mergeOptions({
 
 Vue.config.productionTip = false
 
-Vue.filter("formatDate", value => moment(value).format("LL"))
+Vue.filter("formatDate", value => format(new Date(value), "LLLL do, u"))
 
 /* eslint-disable no-new */
 new Vue({

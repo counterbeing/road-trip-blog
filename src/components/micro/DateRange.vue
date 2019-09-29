@@ -11,14 +11,15 @@
 </template>
 
 <script>
-import moment from "moment"
+import { differenceInHours } from "date-fns"
 
 export default {
   props: ["start", "end"],
   computed: {
     range() {
       if (!(this.start && this.end)) return false
-      return moment.duration(moment(this.end).diff(this.start)).asHours() > 24
+      const diff = differenceInHours(new Date(this.end), new Date(this.start))
+      return diff > 24
     }
   }
 }

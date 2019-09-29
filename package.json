@@ -12,7 +12,6 @@
     "core-js": "^2.6.5",
     "date-fns": "^2.3.0",
     "leaflet": "^1.4.0",
-    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.16.4",
     "vue-dplayer": "^0.0.10",
@@ -38,6 +37,7 @@
     "prettier-eslint": "^9.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "webpack-bundle-analyzer": "^3.5.2"
   }
 }

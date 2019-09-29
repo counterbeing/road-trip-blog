@@ -30,7 +30,8 @@
 
 <script>
 import L from "leaflet"
-import { max, min } from "lodash"
+import min from "lodash/min"
+import max from "lodash/max"
 import { mapActions, mapGetters } from "vuex"
 
 export default {
