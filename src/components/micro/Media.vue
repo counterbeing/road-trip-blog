@@ -11,31 +11,22 @@
       "
       alt=""
     />
-    <d-player v-if="isVideo" :options="options"> </d-player>
+    <vue-plyr v-if="isVideo">
+      <video :src="url"></video>
+    </vue-plyr>
 
     <figcaption>{{ media.description }}</figcaption>
   </div>
 </template>
 <script>
-import VueDPlayer from "vue-dplayer"
-import "vue-dplayer/dist/vue-dplayer.css"
-
 export default {
   name: "Media",
   data() {
     return {
-      options: {
-        video: {
-          url: "https://s3.amazonaws.com/road-trip-blog/" + this.media.file
-        },
-        autoplay: false
-      },
-      player: null
+      url: "https://s3.amazonaws.com/road-trip-blog/" + this.media.file
     }
   },
-  components: {
-    "d-player": VueDPlayer
-  },
+
   props: ["media", "imageWidth"],
   computed: {
     resource() {

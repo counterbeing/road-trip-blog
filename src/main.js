@@ -12,6 +12,10 @@ import "leaflet/dist/leaflet.css"
 import App from "./App"
 import store from "./store"
 
+import VuePlyr from "vue-plyr"
+import "vue-plyr/dist/vue-plyr.css"
+Vue.use(VuePlyr)
+
 Vue.use(VueAnalytics, {
   id: "UA-19114773-13",
   router
