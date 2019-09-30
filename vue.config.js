@@ -13,12 +13,12 @@ module.exports = {
       // new BundleAnalyzerPlugin(),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new PrerenderSPAPlugin({
-        staticDir: path.join(__dirname, "../dist"),
+        staticDir: path.join(__dirname, "./dist"),
         routes: [
           "/",
           "/watch-out-for-your-picnic-baskets-yellowstone-2019-07-16"
+          //...routes
         ]
-        // routes: ["/", ...routes]
       })
     ]
   }

@@ -12,6 +12,8 @@ import "leaflet/dist/leaflet.css"
 import App from "./App"
 import store from "./store"
 
+// TODO: Can this be lazy loaded?
+// https://alexjover.com/blog/lazy-load-in-vue-using-webpack-s-code-splitting/
 import VuePlyr from "vue-plyr"
 import "vue-plyr/dist/vue-plyr.css"
 Vue.use(VuePlyr)
