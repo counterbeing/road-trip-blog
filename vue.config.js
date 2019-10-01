@@ -1,3 +1,4 @@
+const fs = require("fs")
 const webpack = require("webpack")
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 //   .BundleAnalyzerPlugin
@@ -16,6 +17,9 @@ const path = require("path")
 //   // console.log(json.map(story => `/${story.id}`))
 // }
 
+const routes = JSON.parse(fs.readFileSync("./routes.json"))
+console.log(routes)
+
 module.exports = {
   runtimeCompiler: true,
   configureWebpack: {
@@ -24,7 +28,7 @@ module.exports = {
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, "./dist"),
-        routes: ["/"]
+        routes
       })
     ]
   }
