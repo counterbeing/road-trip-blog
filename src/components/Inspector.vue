@@ -39,7 +39,7 @@ export default {
     async fetchData() {
       if (!this.storySelected) {
         this.setStory(null)
-        return;
+        return
       }
       const id = this.$route.params.id
       const response = await fetch(
