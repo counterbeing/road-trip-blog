@@ -7,7 +7,7 @@
           media.file +
           '-w' +
           imageWidth +
-          '.webp'
+          '.jpeg'
       "
       alt=""
     />
@@ -33,7 +33,7 @@ export default {
       return this.media.contentType == "video/x-m4v"
     },
     isPhoto() {
-      return this.media.contentType == "image/webp"
+      return this.media.contentType == "image/jpeg"
     },
     isPano() {
       return this.isPhoto && this.media.width / this.media.height > 1.5
