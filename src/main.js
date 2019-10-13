@@ -24,7 +24,7 @@ Vue.use(VueAnalytics, {
 })
 
 Vue.use(Meta)
-Vue.use(VueLazyload)
+Vue.use(VueLazyload, { preLoad: 2 })
 
 Vue.component("l-map", LMap)
 Vue.component("l-tile-layer", LTileLayer)
