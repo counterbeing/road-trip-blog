@@ -1,7 +1,7 @@
 <template>
   <div id="story-index">
     <h1>STORIES</h1>
-    <ul>
+    <ul class="story-menu">
       <router-link
         v-for="story in stories"
         tag="li"
@@ -48,11 +48,11 @@ export default {
 #story-index {
   text-align: center;
 }
-ul {
+ul.story-menu {
   list-style: none;
   padding: 0;
 }
-li {
+.story-menu li {
   padding: 1em;
   background-color: #fff;
   transition: 0.2s;
@@ -60,18 +60,18 @@ li {
 }
 
 @media (hover: hover) {
-  li:hover {
+  .story-menu li:hover {
     background-color: #f4511e;
     color: white;
   }
 }
 @media (hover: none) {
-  li:active {
+  .story-menu li:active {
     background-color: #f4511e;
     color: white;
   }
 }
-li:hover {
+.story-menu li:hover {
   background-color: #f4511e;
   color: white;
   cursor: pointer;

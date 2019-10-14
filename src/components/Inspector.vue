@@ -102,6 +102,9 @@ export default {
 }
 </script>
 <style>
+ul {
+  padding-left: 3em;
+}
 .inspector {
   text-align: left;
   position: absolute;
