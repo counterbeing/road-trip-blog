@@ -39,7 +39,7 @@ export default {
     async fetchData() {
       if (!this.storySelected) {
         this.setStory(null)
-        return
+        return;
       }
       const id = this.$route.params.id
       const response = await fetch(
@@ -64,7 +64,8 @@ export default {
         meta: [
           { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
           { name: "viewport", content: "width=device-width, initial-scale=1" },
-          { name: "description", content: this.description }
+          { name: "description", content: this.description },
+          { name: "og:image", content: this.imagePreviewUrl }
         ]
       }
     }
@@ -76,6 +77,14 @@ export default {
         return this.story.description
       }
       return `Our time in ${this.story.location}`
+    },
+    imagePreviewUrl() {
+      const photosOnly = this.story.photos.filter(
+        p => p.contentType == "image/jpeg"
+      )
+      const file =
+        photosOnly[Math.floor(Math.random() * photosOnly.length)].file
+      return `https://s3.amazonaws.com/road-trip-blog/${file}-w1200.jpeg`
     },
     storySelected() {
       return this.$route.params.id
