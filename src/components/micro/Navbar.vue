@@ -55,4 +55,19 @@ export default {
     background-color: #fff;
   }
 }
+
+@media screen and (prefers-color-scheme: dark) {
+  @media (pointer: fine) {
+    .child:hover {
+      color: white;
+      background-color: #111;
+    }
+  }
+  @media (pointer: coarse) {
+    .child:active {
+      color: white;
+      background-color: #111;
+    }
+  }
+}
 </style>

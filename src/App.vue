@@ -31,6 +31,26 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+@media (prefers-color-scheme: dark) {
+  body,
+  #app {
+    background-color: #111;
+    color: #817575;
+  }
+  .leaflet-container {
+    background: #111;
+  }
+  .leaflet-bar .leaflet-control-zoom-in,
+  .leaflet-bar .leaflet-control-zoom-out {
+    border-bottom: 1px solid black;
+    background-color: #111;
+    color: #f4511e;
+  }
+  .leaflet-control-attribution.leaflet-control {
+    background-color: black;
+  }
+}
 html,
 body {
   margin: 0;

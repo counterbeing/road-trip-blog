@@ -8,7 +8,7 @@
       @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
-      <l-tile-layer :url="url" :attribution="attribution" />
+      <l-tile-layer :url="mapSource.url" :attribution="mapSource.attribution" />
       <l-marker
         v-for="(place, index) in places"
         @click="updateInspector(place.story)"
@@ -50,10 +50,6 @@ export default {
       placeIndex: null,
       zoom: 3,
       center: L.latLng(35.57369428380629, -97.82369995593741),
-      url:
-        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-      attribution:
-        "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community",
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5
@@ -67,6 +63,27 @@ export default {
         story,
         latLng: L.latLng(story.lat, story.lng)
       }))
+    },
+    mapSource() {
+      //   var CartoDB_DarkMatter = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      //     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      //     subdomains: 'abcd',
+      //     maxZoom: 19
+      // });
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return {
+          url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        }
+      } else {
+        return {
+          url:
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+          attribution:
+            "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community"
+        }
+      }
     },
     photos() {
       if (!this.story || !this.story.photos) return []

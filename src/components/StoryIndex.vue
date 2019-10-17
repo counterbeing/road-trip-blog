@@ -54,7 +54,7 @@ ul.story-menu {
 }
 .story-menu li {
   padding: 1em;
-  background-color: #fff;
+  /* background-color: #fff; */
   transition: 0.2s;
   cursor: pointer;
 }
