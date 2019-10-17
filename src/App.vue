@@ -50,6 +50,10 @@ export default {
   .leaflet-control-attribution.leaflet-control {
     background-color: black;
   }
+
+  .leaflet-marker-icon.leaflet-zoom-animated.leaflet-interactive {
+    filter: brightness(70%);
+  }
 }
 html,
 body {
