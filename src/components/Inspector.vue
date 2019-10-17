@@ -106,13 +106,8 @@ ul {
   padding-left: 3em;
 }
 .inspector {
-  text-align: left;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40%;
-  height: 100%;
-  overflow-y: scroll;
+  flex: 1 1;
+  overflow-y: scroll;;
 }
 .body {
   text-align: left;

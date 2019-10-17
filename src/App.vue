@@ -55,9 +55,26 @@ export default {
     filter: brightness(70%);
   }
 }
+
+::-webkit-scrollbar {
+  background-color: #111;
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #f4511e;
+}
 html,
-body {
+body,
+#app {
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+body {
+  display: flex;
+  flex: 1;
+}
+#app {
+  width: 100%;
 }
 </style>
