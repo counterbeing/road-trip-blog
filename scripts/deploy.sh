@@ -3,7 +3,9 @@ if [ -z "$(git status --porcelain)" ]; then
   NODE_ENV=production yarn build && \
   git checkout gh-pages && \
   git rm -rf . && \
-  mv dist/* ./ ; git checkout master -- .gitignore && \
+  mv dist/* ./ && \
+  mv seo/* ./ && \ 
+  git checkout master -- .gitignore && \
   echo 'together.corylogan.com' >> CNAME && \
   git add . && \
   git commit -am 'rev' && \
