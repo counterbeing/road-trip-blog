@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "route-grabber": "node src/route-grabber.js",
-    "deploy": "yarn route-grabber && NODE_ENV=production yarn build && git checkout gh-pages && git rm -rf . && mv dist/* ./ ; git checkout master -- .gitignore && echo 'together.corylogan.com' >> CNAME && git add . && git commit -am 'rev' && git push origin gh-pages  && git checkout master"
+    "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
     "core-js": "^2.6.5",
