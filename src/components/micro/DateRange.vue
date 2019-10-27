@@ -11,16 +11,16 @@
 </template>
 
 <script>
-import { differenceInHours } from "date-fns"
+import { differenceInHours } from 'date-fns'
 
 export default {
-  props: ["start", "end"],
+  props: ['start', 'end'],
   computed: {
     range() {
       if (!(this.start && this.end)) return false
       const diff = differenceInHours(new Date(this.end), new Date(this.start))
       return diff > 24
-    }
-  }
+    },
+  },
 }
 </script>

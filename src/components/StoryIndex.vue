@@ -18,29 +18,29 @@
 </template>
 
 <script>
-import DateRange from "./micro/DateRange"
-import { mapGetters } from "vuex"
+import DateRange from './micro/DateRange'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { DateRange },
   computed: {
-    ...mapGetters(["stories"])
+    ...mapGetters(['stories']),
   },
   data: () => ({}),
 
   metaInfo: {
-    title: "Index of Places",
-    titleTemplate: "%s ← Katie and Cory go places together",
+    title: 'Index of Places',
+    titleTemplate: '%s ← Katie and Cory go places together',
     meta: [
-      { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
-        name: "description",
+        name: 'description',
         content:
-          "The index of places we've gone together. Links to click and explore the map."
-      }
-    ]
-  }
+          "The index of places we've gone together. Links to click and explore the map.",
+      },
+    ],
+  },
 }
 </script>
 

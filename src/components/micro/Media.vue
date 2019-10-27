@@ -20,28 +20,28 @@
 </template>
 <script>
 export default {
-  name: "Media",
+  name: 'Media',
   data() {
     return {
-      url: "https://s3.amazonaws.com/road-trip-blog/" + this.media.file
+      url: 'https://s3.amazonaws.com/road-trip-blog/' + this.media.file,
     }
   },
 
-  props: ["media", "imageWidth"],
+  props: ['media', 'imageWidth'],
   computed: {
     isVideo() {
-      return this.media.contentType == "video/x-m4v"
+      return this.media.contentType == 'video/x-m4v'
     },
     isPhoto() {
-      return this.media.contentType == "image/jpeg"
+      return this.media.contentType == 'image/jpeg'
     },
     isPano() {
       return this.isPhoto && this.media.width / this.media.height > 1.5
     },
     photoResource() {
-      return this.media.file.split + "-w" + this.imageWidth + ".webp"
-    }
-  }
+      return this.media.file.split + '-w' + this.imageWidth + '.webp'
+    },
+  },
 }
 </script>
 <style lang="scss" scoped></style>

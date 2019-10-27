@@ -29,54 +29,54 @@
 </template>
 
 <script>
-import L from "leaflet"
-import min from "lodash/min"
-import max from "lodash/max"
-import { mapActions, mapGetters } from "vuex"
+import L from 'leaflet'
+import min from 'lodash/min'
+import max from 'lodash/max'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: "Map",
+  name: 'Map',
   data() {
     return {
       cmarker: L.icon({
         // eslint-disable-next-line global-require
-        iconUrl: require("../../public/dot.png"),
+        iconUrl: require('../../public/dot.png'),
         iconSize: [20, 20],
         // eslint-disable-next-line global-require
-        shadowUrl: require("../../public/dot-shadow.png"),
+        shadowUrl: require('../../public/dot-shadow.png'),
         shadowSize: [20, 20],
-        shadowAnchor: [8, 8]
+        shadowAnchor: [8, 8],
       }),
       placeIndex: null,
       zoom: 3,
       center: L.latLng(35.57369428380629, -97.82369995593741),
       showParagraph: false,
       mapOptions: {
-        zoomSnap: 0.5
-      }
+        zoomSnap: 0.5,
+      },
     }
   },
   computed: {
-    ...mapGetters(["story", "stories"]),
+    ...mapGetters(['story', 'stories']),
     places() {
       return this.stories.map(story => ({
         story,
-        latLng: L.latLng(story.lat, story.lng)
+        latLng: L.latLng(story.lat, story.lng),
       }))
     },
     mapSource() {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return {
-          url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+          url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
           attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         }
       } else {
         return {
           url:
-            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
           attribution:
-            "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community"
+            'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
         }
       }
     },
@@ -86,7 +86,7 @@ export default {
         .filter(p => p.lat)
         .map(photo => ({
           photo,
-          latLng: L.latLng(photo.lat, photo.lng)
+          latLng: L.latLng(photo.lat, photo.lng),
         }))
     },
     photoBounds() {
@@ -102,12 +102,12 @@ export default {
       const corner1 = L.latLng(max(latitudes), max(longitudes))
       const corner2 = L.latLng(min(latitudes), min(longitudes))
       return L.latLngBounds(corner1, corner2)
-    }
+    },
   },
   watch: {
     story() {
       this.updateMapBounds()
-    }
+    },
   },
   mounted() {
     // Vue.nextTick(function() {
@@ -120,18 +120,18 @@ export default {
         this.$refs.map.mapObject.fitBounds(this.storyBounds, {
           padding: [1, 1],
           maxZoom: 12,
-          animate: true
+          animate: true,
         })
       } else {
         this.$refs.map.mapObject.fitBounds(this.photoBounds, {
           padding: [1, 1],
-          maxZoom: 12
+          maxZoom: 12,
         })
       }
     },
     updateInspector(story) {
       this.$router
-        .push({ name: "Story", params: { id: story.id } })
+        .push({ name: 'Story', params: { id: story.id } })
         .catch(err => {})
     },
     zoomUpdate(zoom) {
@@ -139,13 +139,13 @@ export default {
     },
     centerUpdate(center) {
       this.currentCenter = center
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style>
-@import "https://unpkg.com/leaflet@1.4.0/dist/leaflet.css";
+@import 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.css';
 
 .map-container {
   flex: 2;

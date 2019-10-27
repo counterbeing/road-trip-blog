@@ -1,9 +1,9 @@
-const fs = require("fs")
-const webpack = require("webpack")
+const fs = require('fs')
+const webpack = require('webpack')
 // const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 //   .BundleAnalyzerPlugin
-const PrerenderSPAPlugin = require("prerender-spa-plugin")
-const path = require("path")
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const path = require('path')
 // const stories = require("../src/components/stories.json")
 // const routes = stories.map(story => `/${story.id}`)
 
@@ -17,8 +17,8 @@ const path = require("path")
 //   // console.log(json.map(story => `/${story.id}`))
 // }
 
-const routes = JSON.parse(fs.readFileSync("./routes.json"))
-console.log(routes)
+const routes = JSON.parse(fs.readFileSync('./routes.json'))
+// console.log(routes)
 
 module.exports = {
   runtimeCompiler: true,
@@ -27,9 +27,9 @@ module.exports = {
       // new BundleAnalyzerPlugin(),
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new PrerenderSPAPlugin({
-        staticDir: path.join(__dirname, "./dist"),
-        routes
-      })
-    ]
-  }
+        staticDir: path.join(__dirname, './dist'),
+        routes,
+      }),
+    ],
+  },
 }

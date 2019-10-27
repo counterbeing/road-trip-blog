@@ -6,17 +6,17 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex"
-import Inspector from "./Inspector"
-import Map from "./Map"
-import Navbar from "./micro/Navbar"
+import { mapGetters } from 'vuex'
+import Inspector from './Inspector'
+import Map from './Map'
+import Navbar from './micro/Navbar'
 
 export default {
   data: () => ({}),
   components: { Map, Inspector, Navbar },
   computed: {
-    ...mapGetters(["story"])
-  }
+    ...mapGetters(['story']),
+  },
 }
 </script>
 <style>
