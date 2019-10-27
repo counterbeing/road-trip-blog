@@ -18,7 +18,6 @@
       </l-marker>
       <l-marker
         :icon="cmarker"
-        v-if="story"
         v-for="photo in photos"
         :lat-lng="photo.latLng"
         v-bind:key="photo.file"
