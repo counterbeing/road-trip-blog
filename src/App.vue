@@ -32,6 +32,10 @@ export default {
   color: #2c3e50;
 }
 
+a {
+  color: #f4511e;
+}
+
 @media (prefers-color-scheme: dark) {
   body,
   #app {
