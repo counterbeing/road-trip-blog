@@ -23,11 +23,11 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex"
-import StoryIndex from "./StoryIndex"
-import Navbar from "./micro/Navbar"
-import DateRange from "./micro/DateRange"
-import Media from "./micro/Media"
+import { mapGetters, mapActions } from "vuex";
+import StoryIndex from "./StoryIndex";
+import Navbar from "./micro/Navbar";
+import DateRange from "./micro/DateRange";
+import Media from "./micro/Media";
 
 export default {
   components: { StoryIndex, Navbar, DateRange, Media },
@@ -38,20 +38,20 @@ export default {
     ...mapActions(["setStory"]),
     async fetchData() {
       if (!this.storySelected) {
-        this.setStory(null)
+        this.setStory(null);
         return;
       }
-      const id = this.$route.params.id
+      const id = this.$route.params.id;
       const response = await fetch(
         `https://road-trip-blog.s3.amazonaws.com/${id}.json`
-      )
-      const json = await response.json()
-      this.story = json
-      this.setStory(json)
+      );
+      const json = await response.json();
+      this.story = json;
+      this.setStory(json);
     }
   },
   created() {
-    this.fetchData()
+    this.fetchData();
   },
   watch: {
     $route: "fetchData"
@@ -67,39 +67,39 @@ export default {
           { name: "description", content: this.description },
           { name: "og:image", content: this.imagePreviewUrl }
         ]
-      }
+      };
     }
-    return {}
+    return {};
   },
   computed: {
     description() {
       if (this.story.description) {
-        return this.story.description
+        return this.story.description;
       }
-      return `Our time in ${this.story.location}`
+      return `Our time in ${this.story.location}`;
     },
     imagePreviewUrl() {
       const photosOnly = this.story.photos.filter(
         p => p.contentType == "image/jpeg"
-      )
+      );
       const file =
-        photosOnly[Math.floor(Math.random() * photosOnly.length)].file
-      return `https://s3.amazonaws.com/road-trip-blog/${file}-w1200.jpeg`
+        photosOnly[Math.floor(Math.random() * photosOnly.length)].file;
+      return `https://s3.amazonaws.com/road-trip-blog/${file}-w1200.jpeg`;
     },
     storySelected() {
-      return this.$route.params.id
+      return this.$route.params.id;
     },
     storySelectedAndLoaded() {
-      return this.storySelected && this.story
+      return this.storySelected && this.story;
     },
     inspectorWidth() {
-      return this.$refs.inspector.offsetWidth
+      return this.$refs.inspector.offsetWidth;
     },
     imageWidth() {
-      return [2100, 1600, 1200, 700, 250].find(el => this.inspectorWidth < el)
+      return [2100, 1600, 1200, 700, 250].find(el => this.inspectorWidth < el);
     }
   }
-}
+};
 </script>
 <style>
 ul {
@@ -107,7 +107,7 @@ ul {
 }
 .inspector {
   flex: 1 1;
-  overflow-y: scroll;;
+  overflow-y: scroll;
 }
 .body {
   text-align: left;
