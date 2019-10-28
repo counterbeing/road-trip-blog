@@ -67,6 +67,13 @@ a {
 ::-webkit-scrollbar-thumb {
   background: #f4511e;
 }
+
+@media only screen and (max-width: 700px) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
 html,
 body,
 #app {

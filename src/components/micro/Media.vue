@@ -15,7 +15,7 @@
       <video :src="url"></video>
     </vue-plyr>
 
-    <Panorama v-if="isPano" :source="panoSource" animationTime="200" />
+    <Panorama v-if="isPano" :source="panoSource" :animationTime="200" />
 
     <figcaption>
       <span v-if="isPano"><b>Panorama!</b></span

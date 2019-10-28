@@ -2,8 +2,8 @@
   <div class="inspector" ref="inspector">
     <story-index v-if="!storySelected" />
 
-    <div v-if="storySelectedAndLoaded">
-      <Navbar :story="story" />
+    <div v-if="storySelectedAndLoaded" class="story">
+      <Navbar :story="story" :show="showNavbar" />
       <main>
         <h1 class="title">{{ story.title }}</h1>
         <h2 class="title">
@@ -18,7 +18,6 @@
           <media :media="photo" :imageWidth="imageWidth" />
         </div>
       </main>
-      <Navbar :story="story" class="mobile-hidden" />
     </div>
   </div>
 </template>
@@ -33,9 +32,32 @@ export default {
   components: { StoryIndex, Navbar, DateRange, Media },
   data: () => ({
     story: null,
+    showNavbar: true,
+    lastScrollPosition: 0,
   }),
+
+  mounted() {
+    this.$refs.inspector.addEventListener('scroll', this.onScroll)
+    window.addEventListener('scroll', this.onScroll)
+  },
+
+  beforeDestroy() {
+    this.$refs.inspector.removeEventListener('scroll', this.onScroll)
+    window.removeEventListener('scroll', this.onScroll)
+  },
   methods: {
     ...mapActions(['setStory']),
+    onScroll() {
+      const currentScrollPosition =
+        this.$refs.inspector.pageYOffset ||
+        this.$refs.inspector.scrollTop ||
+        window.pageYOffset
+
+      if (currentScrollPosition < 0) return
+      this.showNavbar = currentScrollPosition < this.lastScrollPosition
+      this.lastScrollPosition = currentScrollPosition
+    },
+
     async fetchData() {
       if (!this.storySelected) {
         this.setStory(null)
@@ -102,6 +124,9 @@ export default {
 }
 </script>
 <style>
+.story {
+  /* border-top: 1px solid red; */
+}
 ul {
   padding-left: 3em;
 }
@@ -118,6 +143,9 @@ ul {
 .title {
   text-align: left;
   padding: 0 1.5rem;
+}
+h1.title {
+  padding-top: 3.5rem;
 }
 
 .photo {

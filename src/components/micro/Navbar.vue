@@ -1,5 +1,5 @@
 <template>
-  <div class="parent">
+  <div class="parent" :class="{ hidden: !show }">
     <router-link
       tag="div"
       class="child"
@@ -21,17 +21,29 @@
 </template>
 <script>
 export default {
-  props: ['story'],
+  props: ['story', 'show'],
 }
 </script>
 <style scoped>
+.nav-container {
+  transform: translate3d(0, 0, 0);
+}
+.parent.hidden {
+  transform: translate3d(0, -100%, 0);
+}
 .parent {
+  z-index: 10;
   display: flex;
+  transform: translate3d(0, 0, 0);
+  transition: 0.1s all ease-out;
+  position: fixed;
+  top: 0;
   flex-wrap: no-wrap;
   align-content: space-evenly;
   padding: 0;
   text-align: center;
   user-select: none;
+  width: 33.333%;
 }
 .child {
   background-color: #f4511e;
@@ -68,6 +80,12 @@ export default {
       color: white;
       background-color: #111;
     }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .parent {
+    width: 100%;
   }
 }
 </style>

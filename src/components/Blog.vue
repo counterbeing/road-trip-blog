@@ -2,18 +2,16 @@
   <div id="blog">
     <Inspector />
     <Map />
-    <Navbar v-if="story" :story="story" class="desktop-hidden" />
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import Inspector from './Inspector'
 import Map from './Map'
-import Navbar from './micro/Navbar'
 
 export default {
   data: () => ({}),
-  components: { Map, Inspector, Navbar },
+  components: { Map, Inspector },
   computed: {
     ...mapGetters(['story']),
   },
