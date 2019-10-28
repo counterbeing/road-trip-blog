@@ -8510,6 +8510,11 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
+vuejs-panorama@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/vuejs-panorama/-/vuejs-panorama-1.1.9.tgz#f3f3e13d81a069edff2738d647d9c159de9f9000"
+  integrity sha512-aAiNXNWjLTxEijVJa6wJz5iMx5ETHdSLdlUkEknHQMBxRTHXEW4N0IFEmgiSFzZcCcfovE1qOq3DUMsgSBC4UQ==
+
 vuex@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
