@@ -1,8 +1,17 @@
-# Together: A Blog
+# Together: A Travel Blog
 
 View the blog here: https://together.corylogan.com
 
 Built in Vue.js. Feel free to fork it and use it!
+
+## Features
+
+- Support for light dark mode 🌓
+- Pull location data from photos and plot on map 🧭
+- Pull date information from photos to categorize in stories 🗓
+- Navigate by the map 🗺
+
+![Dark and Light mode](./docs/dark-light.jpg)
 
 ## Data Processing
 

@@ -4,7 +4,7 @@ if [ -z "$(git status --porcelain)" ]; then
   git checkout gh-pages && \
   git rm -rf . && \
   mv dist/* ./ && \
-  mv seo/* ./ && \ 
+  mv seo/* ./ && \
   git checkout master -- .gitignore && \
   echo 'together.corylogan.com' >> CNAME && \
   git add . && \
