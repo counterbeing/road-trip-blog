@@ -1,29 +1,9 @@
-# together
+# Together: A Blog
 
-## Project setup
-```
-yarn install
-```
+View the blog here: https://together.corylogan.com
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+Built in Vue.js. Feel free to fork it and use it!
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Data Processing
 
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This is a web app that consumes content in a particular shape. I've built a processor that handles all of that called [together-preprocessor](https://github.com/counterbeing/together-preprocessor).
