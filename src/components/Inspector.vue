@@ -2,9 +2,11 @@
   <div class="inspector" ref="inspector">
     <story-index v-if="!storySelected" />
 
-    <div v-if="storySelectedAndLoaded" class="story">
-      <Navbar :story="story" :show="showNavbar" />
-      <main>
+    <loader v-if="loading" />
+    <div v-if="storySelected" class="story">
+      <Navbar v-if="storySelectedAndLoaded" :story="story" :show="showNavbar" />
+
+      <main v-if="!loading">
         <h1 class="title">{{ story.title }}</h1>
         <h2 class="title">
           <date-range :start="story.startDate" :end="story.endDate" />
@@ -27,10 +29,12 @@ import StoryIndex from './StoryIndex'
 import Navbar from './micro/Navbar'
 import DateRange from './micro/DateRange'
 import Media from './micro/Media'
+import Loader from './micro/Loader'
 
 export default {
-  components: { StoryIndex, Navbar, DateRange, Media },
+  components: { StoryIndex, Navbar, DateRange, Media, Loader },
   data: () => ({
+    loading: true,
     story: null,
     showNavbar: true,
     lastScrollPosition: 0,
@@ -63,7 +67,7 @@ export default {
         this.setStory(null)
         return
       }
-      this.setStory('loading')
+      this.loading = true
       if (this.$refs.inspector) this.$refs.inspector.scrollTop = 0
       const id = this.$route.params.id
       const response = await fetch(
@@ -72,6 +76,7 @@ export default {
       const json = await response.json()
       this.story = json
       this.setStory(json)
+      this.loading = false
     },
   },
   created() {
@@ -110,14 +115,11 @@ export default {
         photosOnly[Math.floor(Math.random() * photosOnly.length)].file
       return `https://s3.amazonaws.com/road-trip-blog/${file}-w1200.jpeg`
     },
-    storyLoading() {
-      return this.story == 'loading'
-    },
     storySelected() {
-      return this.$route.params.id && !this.loading
+      return this.$route.params.id
     },
     storySelectedAndLoaded() {
-      return this.storySelected && this.story
+      return this.storySelected && this.story && !this.loading
     },
     inspectorWidth() {
       return this.$refs.inspector.offsetWidth
@@ -129,9 +131,6 @@ export default {
 }
 </script>
 <style>
-.story {
-  /* border-top: 1px solid red; */
-}
 ul {
   padding-left: 3em;
 }
