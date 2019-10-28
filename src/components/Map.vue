@@ -105,6 +105,7 @@ export default {
   },
   watch: {
     story() {
+      if (this.story == 'loading') return
       this.updateMapBounds()
     },
   },

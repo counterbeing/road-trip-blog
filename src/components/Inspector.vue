@@ -63,6 +63,8 @@ export default {
         this.setStory(null)
         return
       }
+      this.setStory('loading')
+      if (this.$refs.inspector) this.$refs.inspector.scrollTop = 0
       const id = this.$route.params.id
       const response = await fetch(
         `https://road-trip-blog.s3.amazonaws.com/${id}.json`
@@ -108,8 +110,11 @@ export default {
         photosOnly[Math.floor(Math.random() * photosOnly.length)].file
       return `https://s3.amazonaws.com/road-trip-blog/${file}-w1200.jpeg`
     },
+    storyLoading() {
+      return this.story == 'loading'
+    },
     storySelected() {
-      return this.$route.params.id
+      return this.$route.params.id && !this.loading
     },
     storySelectedAndLoaded() {
       return this.storySelected && this.story
