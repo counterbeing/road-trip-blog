@@ -2,7 +2,7 @@
   <div class="inspector" ref="inspector">
     <story-index v-if="!storySelected" />
 
-    <loader v-if="loading" />
+    <loader v-if="loading && storySelected" />
     <div v-if="storySelected" class="story">
       <Navbar v-if="storySelectedAndLoaded" :story="story" :show="showNavbar" />
 
