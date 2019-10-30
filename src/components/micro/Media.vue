@@ -18,8 +18,7 @@
     <Panorama v-if="isPano" :source="panoSource" :animationTime="200" />
 
     <figcaption>
-      <span v-if="isPano"><b>Panorama!</b></span
-      >{{ media.description }}
+      <span v-if="isPano"><b>Panorama! </b></span>{{ media.description }}
     </figcaption>
   </div>
 </template>
@@ -47,7 +46,7 @@ export default {
       return this.media.contentType == 'image/jpeg'
     },
     isPano() {
-      return this.isPhoto && this.media.width / this.media.height > 1.5
+      return this.isPhoto && this.media.width / this.media.height > 1.7
     },
     panoSource() {
       return (
